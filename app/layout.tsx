@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "RX//NOBARA - гайд для стримера на Nobara Linux 43",
+  title: "NOBARA / НАСТРОЙКА - гайд для моего ПК",
   description:
-    "Полный гайд по Nobara Linux 43 KDE Plasma 6: RX 580, LACT, PortProton, OBS, PipeWire, dual-boot и два монитора.",
+    "Полный гайд по Nobara Linux 43 KDE Plasma 6: RX 580, LACT, PortProton, OBS, PipeWire, две системы и два монитора.",
   keywords: [
     "Nobara Linux 43",
     "RX 580",
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "RX//NOBARA" }],
   openGraph: {
-    title: "RX//NOBARA - настройка стрим-машины",
-    description: "Nobara 43, RX 580, два монитора, игры и OBS без шаманства.",
+    title: "NOBARA / НАСТРОЙКА - гайд для моего ПК",
+    description: "Nobara 43, RX 580, Acer 75 Гц, ViewSonic 60 Гц, игры и OBS.",
     type: "website",
     locale: "ru_RU",
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#070a12",
+  themeColor: "#090909",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

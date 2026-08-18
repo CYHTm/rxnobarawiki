@@ -10,9 +10,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "latest",
-    "@radix-ui/react-tabs": "latest",
-    "class-variance-authority": "latest",
     "clsx": "latest",
     "framer-motion": "latest",
     "lucide-react": "latest",

@@ -5,11 +5,11 @@
 ## Что внутри
 
 - первые шаги, обновление и Media Codecs;
-- два монитора 144/165 + 60 Гц, Adaptive Sync и ввод;
+- мониторы Acer 75 Гц + ViewSonic 60 Гц, Adaptive Sync и ввод;
 - LACT, андервольт RX 580 и профиль вентиляторов;
 - PortProton, Lesta Game Center и изоляция префиксов;
 - OBS, VAAPI H.264, Vulkan capture и PipeWire;
-- dual-boot с Windows 11 и аварийные команды;
+- две системы с Windows 11 и аварийные команды;
 - интерактивный чек-лист с сохранением в localStorage.
 
 ## Локальный запуск
@@ -31,6 +31,6 @@ npm run build
 
 ## Публикация
 
-Сайт настроен на статический экспорт Next.js и автоматическую публикацию через GitHub Actions в GitHub Pages. После push в `main` workflow собирает каталог `out` и разворачивает его на Pages.
+Сайт настроен на статический экспорт Next.js. Для публикации содержимое каталога `out` копируется в `docs`, а GitHub Pages раздает папку `/docs` из ветки публикации.
 
 Актуальность материалов: 16 августа 2026 года. Основной источник рекомендаций - [официальная Nobara Wiki](https://wiki.nobaraproject.org/).

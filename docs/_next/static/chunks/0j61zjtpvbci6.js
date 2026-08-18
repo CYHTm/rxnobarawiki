@@ -1,1 +1,0 @@
-(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,40933,e=>{e.q("/rxnobarawiki/_next/static/media/hero-rig.2p4syn6e9nrvg.jpg")}]);

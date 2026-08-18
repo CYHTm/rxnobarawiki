@@ -1,8 +1,7 @@
 "use client";
 
-import { Check, Clipboard, TerminalSquare } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface CodeSnippetProps {
@@ -14,11 +13,9 @@ interface CodeSnippetProps {
 export function CodeSnippet({ code, label = "Терминал", className }: CodeSnippetProps) {
   const [copied, setCopied] = useState(false);
 
-  async function copyCode() {
+  async function copy() {
     try {
       await navigator.clipboard.writeText(code);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
     } catch {
       const area = document.createElement("textarea");
       area.value = code;
@@ -26,33 +23,21 @@ export function CodeSnippet({ code, label = "Терминал", className }: Cod
       area.select();
       document.execCommand("copy");
       area.remove();
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
     }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1500);
   }
 
   return (
-    <div className={cn("overflow-hidden rounded-xl border border-white/[0.08] bg-[#070a12]", className)}>
-      <div className="flex items-center justify-between border-b border-white/[0.06] bg-white/[0.025] px-3 py-2">
-        <span className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <TerminalSquare className="h-3.5 w-3.5" />
-          {label}
-        </span>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={copyCode}
-          className="h-7 px-2 text-slate-400"
-          aria-label={copied ? "Команда скопирована" : "Скопировать команду"}
-        >
-          {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Clipboard className="h-3.5 w-3.5" />}
-          <span>{copied ? "Скопировано" : "Копировать"}</span>
-        </Button>
+    <div className={cn("border border-zinc-800 bg-[#0d0d0d]", className)}>
+      <div className="flex min-h-10 items-center justify-between border-b border-zinc-800 px-3">
+        <span className="text-[11px] font-medium text-zinc-600">{label}</span>
+        <button type="button" onClick={copy} className="flex h-8 items-center gap-2 px-2 text-xs text-zinc-500 hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white" aria-label="Скопировать команду">
+          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+          {copied ? "Готово" : "Копировать"}
+        </button>
       </div>
-      <pre className="overflow-x-auto p-4 text-[13px] leading-6 text-emerald-300 selection:bg-indigo-500/40">
-        <code>{code}</code>
-      </pre>
+      <pre className="overflow-x-auto p-4 font-mono text-[13px] leading-6 text-zinc-200 selection:bg-white selection:text-black"><code>{code}</code></pre>
     </div>
   );
 }
