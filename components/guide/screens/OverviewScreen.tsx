@@ -36,7 +36,7 @@ export function OverviewScreen() {
         <div>
           <span className="overview-state-label">Исходная точка</span>
           <h2>Nobara стоит. Windows осталась. План жив.</h2>
-          <p>PortProton, Lesta Game Center и Tanks Blitz уже установлены. LACT тоже есть, но еще не открывался. Поэтому проверяем состояние, а не долбим кнопку установки второй раз.</p>
+          <p>PortProton, Lesta Game Center и Tanks Blitz уже установлены. LACT тоже есть, но еще не открывался. Поэтому проверяем состояние, а не долбим кнопку установки второй раз. Отдельные экраны помощи, звука и устройств остаются под рукой на случай, когда базовая настройка уже закончилась.</p>
         </div>
         <div className="overview-state-orb" aria-hidden="true"><span>43</span><small>KDE</small></div>
       </motion.div>

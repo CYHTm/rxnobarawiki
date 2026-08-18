@@ -591,11 +591,11 @@ body,
 }
 .rail-brand-mark { width: 2.8rem; height: 2.8rem; }
 
-.rail-navigation { display: flex; width: 100%; min-height: 0; align-items: stretch; justify-content: center; gap: 0.15rem; margin: auto 0; flex-direction: column; }
+.rail-navigation { display: flex; width: 100%; min-height: 0; align-items: stretch; justify-content: flex-start; gap: 0.15rem; margin: auto 0; overflow-y: auto; flex-direction: column; }
 .rail-item {
   position: relative;
   display: flex;
-  min-height: 3.65rem;
+  min-height: 3.35rem;
   align-items: center;
   justify-content: center;
   gap: 0.2rem;

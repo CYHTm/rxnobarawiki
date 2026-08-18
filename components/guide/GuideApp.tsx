@@ -9,11 +9,13 @@ import { openGuideScreen } from "@/components/guide/guide-navigation";
 import { isGuideScreenId, useGuideStore } from "@/components/guide/guide-store";
 import { BootScreen } from "@/components/guide/screens/BootScreen";
 import { DisplayScreen } from "@/components/guide/screens/DisplayScreen";
+import { DevicesScreen } from "@/components/guide/screens/DevicesScreen";
 import { DualBootScreen } from "@/components/guide/screens/DualBootScreen";
 import { GamesScreen } from "@/components/guide/screens/GamesScreen";
 import { LactScreen } from "@/components/guide/screens/LactScreen";
 import { ObsScreen } from "@/components/guide/screens/ObsScreen";
 import { OverviewScreen } from "@/components/guide/screens/OverviewScreen";
+import { RescueScreen } from "@/components/guide/screens/RescueScreen";
 import { SystemScreen } from "@/components/guide/screens/SystemScreen";
 
 const screenComponents = {
@@ -25,6 +27,8 @@ const screenComponents = {
   games: GamesScreen,
   obs: ObsScreen,
   dualboot: DualBootScreen,
+  devices: DevicesScreen,
+  rescue: RescueScreen,
 };
 
 const variants = {

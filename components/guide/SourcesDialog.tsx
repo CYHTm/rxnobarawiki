@@ -5,26 +5,40 @@ import { BookMarked, ExternalLink, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const sources = [
-  ["Скачать Nobara", "https://nobaraproject.org/download.html"],
+  ["Главная Nobara Wiki", "https://wiki.nobaraproject.org/"],
   ["Начало работы с Nobara", "https://wiki.nobaraproject.org/new-user-guide-general-guidelines"],
   ["Правильное обновление", "https://wiki.nobaraproject.org/general-usage/troubleshooting/update-system"],
+  ["FAQ Nobara", "https://wiki.nobaraproject.org/FAQ/FAQ"],
   ["Flatpak в Nobara", "https://wiki.nobaraproject.org/general-usage/flatpaks/nobara-flatpak"],
   ["Магазины Flatpak", "https://wiki.nobaraproject.org/general-usage/flatpaks/flatpak-package-managers"],
   ["Когда нужен нативный пакет", "https://wiki.nobaraproject.org/general-usage/flatpaks/preferred-packages"],
+  ["Исходный код DNF App Center", "https://github.com/Nobara-Project/dnf-app-center"],
   ["Подключение дополнительных дисков", "https://wiki.nobaraproject.org/general-usage/troubleshooting/mounting-automounting-disk-drives"],
   ["OBS в Nobara", "https://wiki.nobaraproject.org/general-usage/additional-software/obs-studio"],
+  ["MangoJuice в Nobara", "https://wiki.nobaraproject.org/general-usage/additional-software/MangoJuice"],
   ["Документация LACT", "https://github.com/ilya-zlobintsev/LACT"],
   ["Настройка AMDGPU в Fedora", "https://docs.fedoraproject.org/en-US/gaming/gpu-overclocking/"],
+  ["Официальная документация Proton", "https://partner.steamgames.com/doc/steamhardware/proton"],
+  ["Lutris", "https://lutris.net/about"],
+  ["Heroic Games Launcher", "https://heroicgameslauncher.com/"],
+  ["Установка Bottles", "https://docs.usebottles.com/getting-started/installation"],
+  ["Запуск .exe и .msi в Bottles", "https://docs.usebottles.com/bottles/run-.exe-.msi-.bat-.lnk-files"],
+  ["Документация DOSBox Staging", "https://www.dosbox-staging.org/getting-started/introduction/"],
+  ["Совместимость ScummVM", "https://www.scummvm.org/compatibility"],
+  ["Документация PipeWire", "https://docs.pipewire.org/"],
+  ["Порталы захвата Wayland", "https://flatpak.github.io/xdg-desktop-portal/docs/"],
+  ["Загрузка прошлого ядра Fedora", "https://fedoramagazine.org/boot-earlier-kernel/"],
+  ["ProtonDB - общественные отчеты", "https://www.protondb.com/"],
+  ["Are We Anti-Cheat Yet - общественная база", "https://areweanticheatyet.com/"],
   ["Параметры OBS для VK Видео Live", "https://vk.ru/faq23473"],
   ["Создание трансляции VK Видео Live", "https://vk.ru/@business-kak-sozdat-translyaciu-v-vk-video-live"],
-  ["Главная Nobara Wiki", "https://wiki.nobaraproject.org/"],
 ];
 
 export function SourcesDialog({ compact = false }: { compact?: boolean }) {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button type="button" className={cn("app-action-button", compact && "app-action-button-compact")} aria-label="Открыть официальные источники">
+        <button type="button" className={cn("app-action-button", compact && "app-action-button-compact")} aria-label="Открыть источники и документацию">
           <BookMarked aria-hidden="true" />
           {!compact && <span>Источники</span>}
         </button>
@@ -36,8 +50,8 @@ export function SourcesDialog({ compact = false }: { compact?: boolean }) {
           <div className="dialog-heading">
             <div className="dialog-heading-icon"><BookMarked aria-hidden="true" /></div>
             <div>
-              <Dialog.Title className="dialog-title">Официальные источники</Dialog.Title>
-              <Dialog.Description className="dialog-description">Если название кнопки изменилось после обновления, сначала смотри сюда, а не в древний ролик с заставкой Linkin Park.</Dialog.Description>
+              <Dialog.Title className="dialog-title">Источники и документация</Dialog.Title>
+              <Dialog.Description className="dialog-description">Основа - официальная Wiki Nobara и документация проектов. ProtonDB и база античита отдельно помечены как общественные: полезно, но не священное писание.</Dialog.Description>
             </div>
           </div>
           <div className="sources-list">

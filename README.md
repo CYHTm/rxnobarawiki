@@ -18,15 +18,17 @@
 1. `/` - самостоятельный полноэкранный Welcome с кнопками входа и общих настроек.
 2. `/guide` - оболочка приложения с отдельным экраном для каждой темы.
 
-Внутри гайда есть карта маршрута и семь тематических экранов:
+Внутри гайда есть карта маршрута и девять тематических экранов:
 
 - проверка dual-boot, `/boot` и общего EFI;
-- Nobara Welcome, обновление, RPM и пользовательский Flatpak;
-- мониторы, ввод, KWallet и Baloo;
+- Nobara Welcome, обновление, RPM, DNF App Center, пользовательский Flatpak, Bottles и очистка места;
+- мониторы, Wayland, захват экрана, ввод, KWallet и Baloo;
 - RX 580, установленный LACT, андервольт и откат;
-- PortProton и универсальная схема Windows-игр;
+- Steam, PortProton, Lutris, Heroic, ретро-игры, проверка совместимости и MangoHUD;
 - OBS, PipeWire и VK Видео Live;
-- Windows UTC, GRUB и Nobara Drive Mount Manager.
+- Windows UTC, GRUB и Nobara Drive Mount Manager;
+- системный звук, Bluetooth, микрофон, контроллеры и Steam Input;
+- единый маршрут восстановления от зависшей Plasma до прошлого ядра, журналов и загрузочной флешки.
 
 Навигация меняет экраны без перезагрузки страницы. Диагностика и откат раскрываются непосредственно внутри связанного шага. На сайте нет чек-листа, отметок выполнения и общего прогресса.
 
@@ -52,7 +54,7 @@ LocalStorage используется только для размера тип�
 - `app/guide/page.tsx` - маршрут приложения;
 - `components/welcome` - стартовый экран и переход во внутрь;
 - `components/guide/GuideApp.tsx` - оболочка и смена сцен;
-- `components/guide/GuideNavigation.tsx` - navigation rail, мобильный dock и переключение экранов;
+- `components/guide/GuideNavigation.tsx` - боковая навигация, мобильная панель и переключение экранов;
 - `components/guide/GuidePrimitives.tsx` - Material-компоненты действий, диагностики и настроек;
 - `components/guide/screens` - отдельный модуль каждого раздела;
 - `components/guide/guide-store.ts` - непостоянное Zustand-состояние;

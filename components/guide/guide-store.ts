@@ -10,7 +10,9 @@ export type GuideScreenId =
   | "lact"
   | "games"
   | "obs"
-  | "dualboot";
+  | "dualboot"
+  | "devices"
+  | "rescue";
 
 export const guideScreenIds: GuideScreenId[] = [
   "overview",
@@ -21,6 +23,8 @@ export const guideScreenIds: GuideScreenId[] = [
   "games",
   "obs",
   "dualboot",
+  "devices",
+  "rescue",
 ];
 
 interface GuideState {
