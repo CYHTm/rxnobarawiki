@@ -24,6 +24,7 @@ export const checklistIds = [
   "prefixes",
   "obs-video",
   "obs-audio",
+  "stream-test",
   "windows-time",
   "grub",
 ] as const;

@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "NOBARA / НАСТРОЙКА - гайд для твоего ПК",
   description:
-    "Пошаговый гайд по установке и настройке Nobara Linux 43 для новичка: Windows 11 рядом, RX 580, LACT, игры, OBS и два монитора.",
+    "Пошаговая настройка уже установленной Nobara Linux 43 для новичка: Windows 11 рядом, RX 580, LACT, игры, VK Видео Live и два монитора.",
   keywords: [
     "Nobara Linux 43",
     "RX 580",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   authors: [{ name: "RX//NOBARA" }],
   openGraph: {
     title: "NOBARA / НАСТРОЙКА - гайд для твоего ПК",
-    description: "Установка и настройка Nobara 43 для новичка: Windows 11 рядом, RX 580, два монитора, игры и OBS.",
+    description: "Настройка установленной Nobara 43 для новичка: Windows 11 рядом, RX 580, игры, OBS и VK Видео Live.",
     type: "website",
     locale: "ru_RU",
   },

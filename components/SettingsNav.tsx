@@ -5,12 +5,12 @@ import { ChecklistProgress } from "@/components/Checklist";
 import { cn } from "@/lib/utils";
 
 export const navigation = [
-  { id: "before", number: "01", label: "До установки" },
-  { id: "start", number: "02", label: "Первый запуск" },
+  { id: "before", number: "01", label: "Установка готова" },
+  { id: "start", number: "02", label: "База после установки" },
   { id: "display", number: "03", label: "Мониторы и мышь" },
   { id: "lact", number: "04", label: "RX 580 и LACT" },
-  { id: "games", number: "05", label: "Windows-игры" },
-  { id: "obs", number: "06", label: "OBS и звук" },
+  { id: "games", number: "05", label: "Игры и PortProton" },
+  { id: "obs", number: "06", label: "OBS и VK Live" },
   { id: "dualboot", number: "07", label: "Windows 11 рядом" },
   { id: "rescue", number: "08", label: "Если сломалось" },
 ];
