@@ -5,6 +5,9 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export const checklistIds = [
+  "backup",
+  "usb",
+  "install",
   "welcome",
   "sync",
   "codecs",
@@ -104,7 +107,7 @@ export function ChecklistToggle({ id, label }: { id: ChecklistId; label: string 
       onClick={() => toggle(id)}
       className={cn(
         "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white",
-        checked ? "border-white bg-white text-black" : "border-zinc-700 bg-transparent text-transparent hover:border-zinc-400",
+        checked ? "border-white bg-white text-black" : "border-zinc-400 bg-transparent text-transparent hover:border-white",
       )}
     >
       <Check className="h-4 w-4" strokeWidth={2.5} />
@@ -119,10 +122,10 @@ export function ChecklistProgress({ compact = false }: { compact?: boolean }) {
   return (
     <div className={compact ? "min-w-32" : "w-full"}>
       <div className="mb-2 flex items-center justify-between gap-3 text-xs">
-        <span className="text-zinc-500">Готово</span>
-        <span className="font-mono font-semibold text-zinc-200">{completed}/{total}</span>
+        <span className="text-zinc-200">Готово</span>
+        <span className="font-mono font-semibold text-white">{completed}/{total}</span>
       </div>
-      <div className="h-1 bg-zinc-800" role="progressbar" aria-label={`Выполнено ${percent}%`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent}>
+      <div className="h-1 bg-zinc-500" role="progressbar" aria-label={`Выполнено ${percent}%`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent}>
         <div className="h-full bg-white transition-[width] duration-300" style={{ width: `${percent}%` }} />
       </div>
     </div>

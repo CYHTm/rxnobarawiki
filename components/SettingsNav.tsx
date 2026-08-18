@@ -5,17 +5,18 @@ import { ChecklistProgress } from "@/components/Checklist";
 import { cn } from "@/lib/utils";
 
 export const navigation = [
-  { id: "start", number: "01", label: "После установки" },
-  { id: "display", number: "02", label: "Мониторы и мышь" },
-  { id: "lact", number: "03", label: "RX 580 и LACT" },
-  { id: "games", number: "04", label: "Игры" },
-  { id: "obs", number: "05", label: "OBS и звук" },
-  { id: "dualboot", number: "06", label: "Две системы" },
-  { id: "rescue", number: "07", label: "Если все сломалось" },
+  { id: "before", number: "01", label: "До установки" },
+  { id: "start", number: "02", label: "Первый запуск" },
+  { id: "display", number: "03", label: "Мониторы и мышь" },
+  { id: "lact", number: "04", label: "RX 580 и LACT" },
+  { id: "games", number: "05", label: "Windows-игры" },
+  { id: "obs", number: "06", label: "OBS и звук" },
+  { id: "dualboot", number: "07", label: "Windows 11 рядом" },
+  { id: "rescue", number: "08", label: "Если сломалось" },
 ];
 
 function useActiveSection() {
-  const [active, setActive] = useState("start");
+  const [active, setActive] = useState("before");
 
   useEffect(() => {
     const sections = navigation
@@ -44,15 +45,22 @@ export function DesktopNav() {
     <aside className="sticky top-24 hidden h-[calc(100vh-7rem)] flex-col lg:flex">
       <nav aria-label="Разделы гайда" className="space-y-1">
         {navigation.map((item) => (
-          <a key={item.id} href={`#${item.id}`} className={cn("grid grid-cols-[28px_1fr] px-3 py-2.5 text-sm transition-colors", active === item.id ? "bg-white text-black" : "text-zinc-600 hover:bg-zinc-900 hover:text-zinc-200")}>
+          <a
+            key={item.id}
+            href={`#${item.id}`}
+            className={cn(
+              "grid grid-cols-[28px_1fr] px-3 py-2.5 text-sm transition-colors",
+              active === item.id ? "bg-white text-black" : "text-zinc-300 hover:bg-zinc-700/60 hover:text-white",
+            )}
+          >
             <span className="font-mono text-[10px] opacity-60">{item.number}</span>
             <span className="font-medium">{item.label}</span>
           </a>
         ))}
       </nav>
-      <div className="mt-auto border-t border-zinc-800 px-3 pt-5">
+      <div className="mt-auto border-t border-zinc-500/60 px-3 pt-5">
         <ChecklistProgress />
-        <p className="mt-3 text-[11px] leading-4 text-zinc-700">Галочки сохраняются в браузере.</p>
+        <p className="mt-3 text-[11px] leading-4 text-zinc-300">Галочки сохраняются в этом браузере.</p>
       </div>
     </aside>
   );
@@ -60,10 +68,10 @@ export function DesktopNav() {
 
 export function MobileNav() {
   return (
-    <div className="sticky top-14 z-30 -mx-4 overflow-x-auto border-y border-zinc-800 bg-[#161616] px-4 sm:-mx-6 sm:px-6 lg:hidden">
+    <div className="sticky top-14 z-30 -mx-4 overflow-x-auto border-y border-zinc-500/60 bg-[#424242] px-4 sm:-mx-6 sm:px-6 lg:hidden">
       <nav className="flex min-w-max" aria-label="Разделы гайда">
         {navigation.map((item) => (
-          <a key={item.id} href={`#${item.id}`} className="border-r border-zinc-800 px-4 py-3 font-mono text-[11px] text-zinc-500 first:border-l hover:text-white">
+          <a key={item.id} href={`#${item.id}`} className="border-r border-zinc-500/60 px-4 py-3 font-mono text-[11px] text-zinc-200 first:border-l hover:bg-zinc-700/60 hover:text-white">
             {item.number} {item.label}
           </a>
         ))}
