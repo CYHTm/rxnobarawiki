@@ -921,7 +921,7 @@ input[type="range"]::-moz-range-thumb { width: 0.8rem; height: 0.8rem; border: 0
 @keyframes accordion-down { from { height: 0; opacity: 0; } to { height: var(--radix-accordion-content-height); opacity: 1; } }
 @keyframes accordion-up { from { height: var(--radix-accordion-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
 
-/* Заметоки: постоянно видимый белый список команд без аккордеонов. */
+/* Заметки: постоянно видимый белый список команд без аккордеонов. */
 .notes-safety-card {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);

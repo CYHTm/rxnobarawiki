@@ -217,7 +217,7 @@ export function NotesScreen() {
     <GuideScreen
       id="notes"
       number="10"
-      title="Заметоки"
+      title="Заметки"
       description="Команды, которые реально нужны под рукой: все сразу видны, каждая копируется одной кнопкой, никакого аккордеона и терминального сатанизма."
     >
       <section className="notes-safety-card" aria-labelledby="notes-safety-title">

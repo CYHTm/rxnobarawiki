@@ -1,11 +1,11 @@
 "use client";
 
 import { CodeSnippet } from "@/components/CodeSnippet";
-import { Code, GuideScreen, Setting, Settings, StepBlock, SupportPanel } from "@/components/guide/GuidePrimitives";
+import { Code, GuideScreen, Setting, Settings, StepBlock, SupportPanel, Warning } from "@/components/guide/GuidePrimitives";
 
 export function SystemScreen() {
   return (
-    <GuideScreen id="start" number="02" title="База после установки" description="Система уже запускалась, но эти проверки все равно делаем один раз: штатное обновление, кодеки и понятная схема программ.">
+    <GuideScreen id="start" number="02" title="База после установки" description="Система уже запускалась, но эти проверки все равно делаем один раз: штатное обновление, кодеки, встроенная оптимизация и понятная схема программ.">
       <StepBlock id="welcome" title="Открой Nobara Welcome">
         Это стартовая панель самой Nobara, а не реклама. Слева открой <Code>First Steps</Code>. Отсюда запускаются обновление, менеджер драйверов и рекомендованные дополнения. На RX 580 обычный графический драйвер AMD уже находится в системе. <Code>rocm-meta</Code> и экспериментальный <Code>mesa-vulkan-drivers-git</Code> для обычных игр не нужны.
       </StepBlock>
@@ -42,6 +42,73 @@ export function SystemScreen() {
 
       <StepBlock id="codecs" title="На вопрос о Media Codecs ответь YES" status="не пропускай">
         Кодеки нужны системе, чтобы читать и записывать H.264, H.265 и другие распространенные форматы. Без них может не воспроизводиться видео, не работать аппаратное кодирование OBS или появиться черный экран в браузере. Nobara сама показывает этот вопрос во время первого обновления. Нажми <strong className="text-white">YES</strong> и дождись завершения.
+      </StepBlock>
+
+      <StepBlock id="nobara-optimization" title="Проверь то, что Nobara уже оптимизировала" status="без новых твиков">
+        <p>Отдельный экран с «ускорителями» здесь не нужен. Штатная установка Nobara 43 KDE уже включает сжатую подкачку в оперативной памяти, игровой демон falcond, правила для планировщика дисков, irqbalance и защиту от полного зависания при нехватке памяти. Сначала подтверждаем их состояние на твоем ПК, а не ставим второй набор демонов поверх первого.</p>
+
+        <Settings className="mt-5">
+          <Setting label="Zram" value="Сжатая подкачка в оперативной памяти" />
+          <Setting label="falcond" value="Игровой профиль включается автоматически" />
+          <Setting label="NVMe scheduler" value="Штатный режим none" />
+          <Setting label="preload" value="Не установлен и на NVMe не нужен" />
+        </Settings>
+
+        <h4 className="mt-6 font-semibold text-white">Zram помогает пережить нехватку 16 ГБ памяти</h4>
+        <p className="mt-2"><strong className="text-white">Zram</strong> создает сжатое устройство подкачки прямо в оперативной памяти. Это не добавляет настоящие гигабайты и не хранит подкачку на NVMe, но позволяет дольше не убивать приложение при коротком пике памяти. Пакет приходит из базовой группы системы, поэтому отдельный «оптимизатор RAM» ставить не надо.</p>
+        <CodeSnippet code="rpm -q zram-generator-defaults; zramctl; swapon --show" label="Проверить пакет, zram и активную подкачку" className="mt-4" />
+        <p className="mt-4">Нормальный результат - версия <Code>zram-generator-defaults</Code>, устройство <Code>/dev/zram0</Code> и строка типа <Code>partition</Code> в выводе подкачки. Размер zram может отличаться от объема оперативной памяти. Если пакета или устройства нет, сначала закончи штатное обновление, перезагрузи ПК и повтори проверку. Не скачивай случайный zram-скрипт.</p>
+
+        <h4 className="mt-6 font-semibold text-white">falcond сам включает игровой режим и потом возвращает прежнее состояние</h4>
+        <p className="mt-2"><strong className="text-white">falcond</strong> - штатный игровой демон Nobara. Он замечает процесс игры, выбирает профиль и, если функция доступна на железе, просит системный менеджер питания перейти в <Code>performance</Code>. Для отдельных игр профиль также может выбрать SCX-планировщик процессора или запретить засыпание экрана. После закрытия игры falcond восстанавливает прошлый профиль питания и планировщик.</p>
+        <div className="mt-4 space-y-3">
+          <CodeSnippet code="systemctl is-enabled falcond; systemctl is-active falcond" label="Проверить автозапуск и работу falcond" />
+          <CodeSnippet code="cat /var/lib/falcond/status" label="Показать настройки и активный игровой профиль" />
+        </div>
+        <p className="mt-4">Сначала жди строки <Code>enabled</Code> и <Code>active</Code>. Без запущенной игры <Code>ACTIVE_PROFILE</Code> должен быть пустым или <Code>(None)</Code> - это покой, а не поломка. Запусти игру, подожди до 9 секунд и прочитай статус снова: появится профиль игры или общий профиль Proton. Ручной режим производительности на весь день для этого не нужен.</p>
+        <SupportPanel title="falcond не активен или статус-файла нет">
+          <p className="mb-4">Сначала посмотри причину без изменения системы:</p>
+          <CodeSnippet code="systemctl status falcond --no-pager" label="Показать состояние и последние сообщения falcond" />
+          <p className="mb-4 mt-5">Если пакет есть, а служба просто остановилась, перезапусти ее и повтори проверку статуса:</p>
+          <CodeSnippet code="sudo systemctl restart falcond" label="Перезапустить штатный игровой демон" />
+          <p className="mt-4">Если служба снова падает, сохрани ее вывод и не подменяй falcond другим оптимизатором. Сначала обнови Nobara через <Code>nobara-sync</Code>.</p>
+        </SupportPanel>
+        <SupportPanel title="Почему не добавляем gamemoderun в параметры каждой игры">
+          <p>Пакет Feral GameMode есть в образе, но сам факт установки не велит запускать его для каждой игры. Официальная Wiki Nobara запрещает одновременно применять GameMode и falcond к одной игре. Оба меняют режим производительности и могут спорить при восстановлении настроек. Поэтому не добавляй <Code>gamemoderun %command%</Code>, пока falcond активен. Больше демонов не означает больше кадров, иногда это просто драка двух дворников за одну швабру.</p>
+        </SupportPanel>
+
+        <h4 className="mt-6 font-semibold text-white">NVMe уже получает подходящий планировщик</h4>
+        <p className="mt-2"><strong className="text-white">Планировщик ввода-вывода</strong> решает, в каком порядке накопитель получает запросы. Правило Nobara выбирает <Code>none</Code> для NVMe, <Code>mq-deadline</Code> для SATA SSD и <Code>bfq</Code> для жесткого диска. Для быстрого NVMe режим <Code>none</Code> означает, что ядро не устраивает лишнюю очередь поверх контроллера.</p>
+        <CodeSnippet code="grep . /sys/block/nvme*/queue/scheduler" label="Показать планировщик каждого NVMe" className="mt-4" />
+        <p className="mt-4">Выбранный вариант отмечен квадратными скобками, ожидаемый ответ - <Code>[none]</Code>. Если видишь другой вариант, не записывай новое значение в <Code>/sys</Code> вручную: после перезагрузки оно все равно пропадет. Сохрани вывод вместе с <Code>lsblk -f</Code> и сначала проверь штатные обновления.</p>
+
+        <h4 className="mt-6 font-semibold text-white">Preload для этого NVMe пропускаем</h4>
+        <p className="mt-2"><strong className="text-white">Preload</strong> пытается предугадывать запуск программ и заранее читать файлы в память. В официальном KDE-образе Nobara 43 его нет, а для Fedora 43 не находится актуального штатного пакета. На NVMe выигрыш сомнительный, зато демон постоянно наблюдает за запуском программ и занимает память.</p>
+        <CodeSnippet code="rpm -q preload" label="Убедиться, что preload не установлен" className="mt-4" />
+        <p className="mt-4">Ожидаемое сообщение - пакет <Code>preload</Code> не установлен. Это правильный результат. Не подключай старый COPR и не собирай заброшенный пакет ради красивого слова «оптимизация».</p>
+
+        <SupportPanel title="Еще три штатные вещи, которые не надо дублировать">
+          <p><Code>irqbalance</Code> распределяет аппаратные прерывания между потоками процессора. <Code>systemd-oomd</Code> помогает вернуть управление системой при критической нехватке памяти. Для Wine Nobara отдельно задает подходящий quantum PipeWire, чтобы не требовать общего системного твика звука.</p>
+          <CodeSnippet code="systemctl status irqbalance systemd-oomd --no-pager" label="Проверить службы распределения прерываний и защиты памяти" className="mt-4" />
+          <p className="mt-4">Не ставь рядом earlyoom, nohang, Ananicy, tuned или второй менеджер питания просто по списку из чужой Fedora. Сначала должен существовать измеримый сбой, которого не решают уже установленные механизмы.</p>
+        </SupportPanel>
+
+        <h4 className="mt-6 font-semibold text-white">Режим performance не поднимает TDP Ryzen 5 2600</h4>
+        <p className="mt-2">Проверь, какие профили питания и какой драйвер частоты реально доступны. На старом Zen+ нормален <Code>acpi-cpufreq</Code>. Не добавляй параметр <Code>amd_pstate=active</Code> ради нового названия: документация ядра относит amd-pstate к более новым процессорам с CPPC, а неподдерживаемое железо все равно откатывается к старому драйверу.</p>
+        <CodeSnippet code="powerprofilesctl list; powerprofilesctl get; cat /sys/devices/system/cpu/cpufreq/policy0/scaling_driver" label="Проверить профили питания и драйвер частоты CPU" className="mt-4" />
+        <p className="mt-4">Если профиль <Code>performance</Code> доступен, falcond включает его только на время игры. Это меняет политику выбора частоты, но не напряжение, множитель и паспортный лимит мощности. Если performance в списке нет, не создавай его скриптом: штатный Precision Boost процессора продолжает работать в пределах BIOS, температуры и питания.</p>
+
+        <Warning>Ryzen 5 2600 имеет паспортный TDP 65 Вт, частоты 3,4-3,9 ГГц и разблокированный множитель, но это не делает любое повышение лимита безопасным. Официальный PBO не совместим с Ryzen второго поколения. На Gigabyte B450M S2H используется простая 4+3-фазная схема питания, а ревизия платы, кулер, обдув VRM и реальные температуры здесь неизвестны. Поэтому универсального безопасного числа PPT, TDC, EDC или напряжения для этого ПК нет.</Warning>
+        <Settings className="mt-5">
+          <Setting label="Core Performance Boost" value="Auto или Enabled" />
+          <Setting label="CPU Clock Ratio" value="Auto" />
+          <Setting label="CPU Vcore" value="Auto" />
+          <Setting label="Программное повышение TDP" value="Не применять" />
+        </Settings>
+        <p className="mt-5">Оставь штатный boost и смотри температуру CPU в MangoHUD или через <Code>sensors</Code> во время реальной игры. Если процессор перегревается или сбрасывает частоту, сначала чистят охлаждение, проверяют прижим кулера и настраивают кривую вентилятора. Утилита RyzenAdj предназначена для мобильных Ryzen, а сторонний модуль ryzen_smu и запись через <Code>/dev/mem</Code> для настольного Ryzen 5 2600 не являются разумным способом добыть пару кадров.</p>
+        <SupportPanel title="Почему здесь нет инструкции ручного разгона">
+          <p>Ручной множитель и напряжение в BIOS действительно возможны, потому что процессор разблокирован. Но это уже разгон, а не настройка Nobara: он требует известного кулера, обдува зоны питания, стресс-тестов, контроля напряжения и готовности сбрасывать CMOS после неудачной загрузки. Он может увеличить нагрев, потребление и нестабильность, а в игре с RX 580 прирост еще и часто упрется в видеокарту. Для новичка на этой плате измеримый риск выше ожидаемой пользы, поэтому кентская рекомендация простая - не повышать TDP и не фиксировать частоту.</p>
+        </SupportPanel>
       </StepBlock>
 
       <StepBlock id="apps" title="Поставь qBittorrent, Vesktop и Chrome через Flatpak">

@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   title: "NOBARA / ТВОЙ ПК",
   description:
-    "Интерактивный гайд по уже установленной Nobara Linux 43 для твоего ПК: двойная загрузка с Windows 11, Wayland, игры, стрим, устройства и восстановление системы.",
+    "Интерактивный гайд по уже установленной Nobara Linux 43 для твоего ПК: штатная оптимизация, Windows 11, Wayland, игры, стрим, устройства и восстановление системы.",
   keywords: [
     "Nobara Linux 43",
     "RX 580",
@@ -17,11 +17,13 @@ export const metadata: Metadata = {
     "OBS VAAPI",
     "PipeWire",
     "KDE Plasma 6",
+    "falcond",
+    "zram",
   ],
   authors: [{ name: "NOBARA / ТВОЙ ПК" }],
   openGraph: {
     title: "NOBARA / ТВОЙ ПК",
-    description: "Одиннадцать экранов настройки, безопасных команд и восстановления уже установленной Nobara 43 для твоего ПК.",
+    description: "Одиннадцать экранов настройки, штатной оптимизации, безопасных команд и восстановления уже установленной Nobara 43 для твоего ПК.",
     type: "website",
     locale: "ru_RU",
   },
