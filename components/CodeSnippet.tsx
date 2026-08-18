@@ -29,7 +29,7 @@ export function CodeSnippet({ code, label = "Терминал", className }: Cod
   }
 
   return (
-    <div className={cn("border border-zinc-800 bg-[#0d0d0d]", className)}>
+    <div className={cn("border border-zinc-800 bg-[#1d1d1d]", className)}>
       <div className="flex min-h-10 items-center justify-between border-b border-zinc-800 px-3">
         <span className="text-[11px] font-medium text-zinc-600">{label}</span>
         <button type="button" onClick={copy} className="flex h-8 items-center gap-2 px-2 text-xs text-zinc-500 hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white" aria-label="Скопировать команду">

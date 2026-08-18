@@ -12,7 +12,7 @@ import { DesktopNav, MobileNav } from "@/components/SettingsNav";
 export function GuideContent() {
   return (
     <ChecklistProvider>
-      <div className="min-h-screen bg-[#090909] text-zinc-200">
+      <div className="min-h-screen bg-[#161616] text-zinc-200">
         <Header />
         <div className="mx-auto max-w-[1180px] px-4 sm:px-6">
           <MobileNav />
@@ -38,7 +38,7 @@ export function GuideContent() {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-40 h-14 border-b border-zinc-800 bg-[#090909]">
+    <header className="sticky top-0 z-40 h-14 border-b border-zinc-800 bg-[#161616]">
       <div className="mx-auto flex h-full max-w-[1180px] items-center justify-between px-4 sm:px-6">
         <a href="#top" className="font-mono text-xs font-semibold tracking-[0.16em] text-white">
           NOBARA / НАСТРОЙКА
@@ -330,7 +330,7 @@ function Spec({ label, value }: { label: string; value: string }) {
 }
 
 function Code({ children }: { children: React.ReactNode }) {
-  return <code className="border border-zinc-800 bg-zinc-950 px-1.5 py-0.5 font-mono text-[12px] text-zinc-200">{children}</code>;
+  return <code className="border border-zinc-800 bg-[#1d1d1d] px-1.5 py-0.5 font-mono text-[12px] text-zinc-200">{children}</code>;
 }
 
 function Settings({ children, className = "" }: { children: React.ReactNode; className?: string }) {

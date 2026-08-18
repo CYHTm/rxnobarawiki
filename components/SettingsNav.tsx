@@ -60,7 +60,7 @@ export function DesktopNav() {
 
 export function MobileNav() {
   return (
-    <div className="sticky top-14 z-30 -mx-4 overflow-x-auto border-y border-zinc-800 bg-[#090909] px-4 sm:-mx-6 sm:px-6 lg:hidden">
+    <div className="sticky top-14 z-30 -mx-4 overflow-x-auto border-y border-zinc-800 bg-[#161616] px-4 sm:-mx-6 sm:px-6 lg:hidden">
       <nav className="flex min-w-max" aria-label="Разделы гайда">
         {navigation.map((item) => (
           <a key={item.id} href={`#${item.id}`} className="border-r border-zinc-800 px-4 py-3 font-mono text-[11px] text-zinc-500 first:border-l hover:text-white">
