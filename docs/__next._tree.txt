@@ -1,2 +1,2 @@
 :HL["/rxnobarawiki/_next/static/chunks/3uoimfwtouwan.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"jxrC9cLRrRuVoVyE4ziEr"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"VMN1lhrjw-HmQaxD4-V__"}

@@ -64,7 +64,7 @@ function Intro() {
         Этот гайд написан для перехода с Windows 11 на Nobara как на вторую систему. От тебя не требуется заранее знать Fedora, команды Linux или названия пакетных менеджеров. В каждом пункте есть действие, причина, ожидаемый результат и откат там, где он нужен.
       </p>
       <div className="mt-7 border-l-2 border-zinc-200 bg-zinc-700/30 px-4 py-3 text-sm leading-6 text-zinc-100">
-        <strong className="text-white">Текущее состояние:</strong> Nobara уже установлена рядом с Windows на одном NVMe, общий EFI имеет размер 200 МБ, PortProton, Lesta Game Center и Tanks Blitz уже работают, LACT установлен, но еще не проверен. Гайд не заставляет повторять сделанное. Он объясняет, как проверить результат и что настраивать дальше.
+        <strong className="text-white">Текущее состояние:</strong> Nobara уже установлена рядом с Windows на одном NVMe, общий EFI имеет размер 200 МБ, PortProton, Lesta Game Center и Tanks Blitz уже установлены, LACT установлен, но еще не проверен. Гайд не заставляет повторять сделанное. Он объясняет, как проверить результат и что настраивать дальше.
       </div>
       <div className="mt-9 grid border-y border-zinc-500/60 sm:grid-cols-4">
         <Spec label="Процессор" value="Ryzen 5 2600" />
@@ -327,7 +327,7 @@ function Lact() {
 
 function Games() {
   return (
-    <SectionCard id="games" number="05" title="Игры без привязки к одному лаунчеру" description="PortProton, Lesta Game Center и Tanks Blitz уже стоят. Используем их как проверенный пример, а дальше строим понятную схему для любой игры.">
+    <SectionCard id="games" number="05" title="Игры без привязки к одному лаунчеру" description="PortProton, Lesta Game Center и Tanks Blitz уже стоят. Используем их как контрольный пример, а дальше строим понятную схему для любой игры.">
       <ActionRow
         id="portproton"
         title="Проверь уже установленную игровую основу"
@@ -338,7 +338,7 @@ function Games() {
         <p className="mt-4">Команда покажет версию PortProton, если он установлен как RPM. Если она отвечает <Code>package portproton is not installed</Code>, но программа открывается, значит ее могли поставить другим способом. Это не повод удалять рабочую установку: сначала посмотри свойства ярлыка и откуда он запускается.</p>
         <Settings className="mt-5">
           <Setting label="PortProton" value="Оболочка для Windows-программ" />
-          <Setting label="Lesta Game Center" value="Уже рабочий лаунчер-пример" />
+          <Setting label="Lesta Game Center" value="Уже установленный лаунчер-пример" />
           <Setting label="Tanks Blitz" value="Контрольный запуск графики и звука" />
           <Setting label="Новые игры" value="Отдельный префикс для каждой" />
         </Settings>
@@ -351,7 +351,7 @@ function Games() {
       </ActionRow>
 
       <ActionRow id="prefixes" title="Добавляй другие игры по одной понятной схеме">
-        Сначала выясни, какая перед тобой игра. Нативная Linux-версия запускается без Wine. Windows-игра из Steam обычно работает через Proton внутри нативного Steam. Отдельный <Code>setup.exe</Code> или чужой лаунчер удобнее запускать через PortProton. Не надо пихать каждую игру в префикс Lesta только потому, что он уже работает.
+        Сначала выясни, какая перед тобой игра. Нативная Linux-версия запускается без Wine. Windows-игра из Steam обычно работает через Proton внутри нативного Steam. Отдельный <Code>setup.exe</Code> или чужой лаунчер удобнее запускать через PortProton. Не надо пихать каждую игру в префикс Lesta только потому, что он уже создан.
         <ol className="mt-5 list-decimal space-y-3 pl-5 text-sm leading-6 text-zinc-200">
           <li><strong className="text-white">Steam-игра.</strong> Поставь нативный Steam из репозитория Nobara, открой свойства конкретной игры и включай Proton только для нее, если Linux-версии нет.</li>
           <li><strong className="text-white">Обычный Windows-установщик.</strong> Открой файл через PortProton, создай новый префикс с понятным именем и устанавливай игру туда.</li>
