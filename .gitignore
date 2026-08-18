@@ -1,0 +1,19 @@
+# Зависимости
+/node_modules
+
+# Сборка Next.js
+/.next
+/out
+
+# Локальные файлы
+.DS_Store
+*.pem
+npm-debug.log*
+
+# Переменные окружения
+.env*
+!.env.example
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
