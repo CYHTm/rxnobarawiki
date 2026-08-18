@@ -1,16 +1,28 @@
 # RX//NOBARA
 
-Интерактивный русскоязычный гайд по настройке Nobara Linux 43 KDE Plasma 6 Wayland для стримера на Ryzen 5 2600 и RX 580.
+Русскоязычный гайд по настройке уже установленной Nobara Linux 43 KDE Plasma 6 Wayland для новичка, который переходит с Windows 11.
+
+## Конфигурация
+
+- Ryzen 5 2600;
+- Radeon RX 580 8 ГБ;
+- 16 ГБ оперативной памяти;
+- Gigabyte B450M S2H;
+- NVMe 512 ГБ с Windows 11 и Nobara;
+- Acer 75 Гц и ViewSonic 60 Гц.
 
 ## Что внутри
 
-- первые шаги, обновление и Media Codecs;
-- мониторы Acer 75 Гц + ViewSonic 60 Гц, Adaptive Sync и ввод;
-- LACT, андервольт RX 580 и профиль вентиляторов;
-- PortProton, Lesta Game Center и изоляция префиксов;
-- OBS, VAAPI H.264, Vulkan capture и PipeWire;
-- две системы с Windows 11 и аварийные команды;
-- интерактивный чек-лист с сохранением в localStorage.
+- проверка `/boot`, общего EFI-раздела и свободного места без повторной установки;
+- Nobara Welcome, штатное обновление, Media Codecs, RPM и пользовательские Flatpak;
+- мониторы, Adaptive Sync, мышь, KWallet и Baloo;
+- проверка установленного LACT, условный параметр RX 580, андервольт и откат;
+- PortProton, отдельные Wine-префиксы и диагностика любых Windows-игр;
+- нативный OBS, VAAPI H.264, PipeWire и VK Видео Live;
+- Windows UTC, GRUB и автомонтирование игровых дисков;
+- три размера текста с сохранением единственной настройки в LocalStorage.
+
+Диагностика и откат находятся рядом с соответствующим действием. На сайте нет чек-листа, отметок выполнения и общего прогресса.
 
 ## Локальный запуск
 
@@ -31,6 +43,13 @@ npm run build
 
 ## Публикация
 
-Сайт настроен на статический экспорт Next.js. Для публикации содержимое каталога `out` копируется в `docs`, а GitHub Pages раздает папку `/docs` из ветки публикации.
+Сайт использует статический экспорт Next.js. Для GitHub Pages сборка создается с базовым путем репозитория, после чего содержимое `out` синхронизируется в `docs`:
 
-Актуальность материалов: 16 августа 2026 года. Основной источник рекомендаций - [официальная Nobara Wiki](https://wiki.nobaraproject.org/).
+```bash
+NEXT_PUBLIC_BASE_PATH=/rxnobarawiki npm run build
+rm -rf docs
+cp -R out docs
+touch docs/.nojekyll
+```
+
+GitHub Pages раздает папку `/docs` из ветки публикации. Основной источник системных рекомендаций - [официальная Nobara Wiki](https://wiki.nobaraproject.org/).

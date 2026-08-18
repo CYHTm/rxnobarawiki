@@ -1,24 +1,25 @@
 "use client";
 
-import { ExternalLink, RotateCcw } from "lucide-react";
+import { ArrowDown, ExternalLink, MonitorCog } from "lucide-react";
 import { ActionRow } from "@/components/ActionRow";
-import { ChecklistProgress, ChecklistProvider } from "@/components/Checklist";
 import { CodeSnippet } from "@/components/CodeSnippet";
 import { Disclosure } from "@/components/Disclosure";
 import { LactCalculator } from "@/components/LactCalculator";
 import { SectionCard } from "@/components/SectionCard";
 import { DesktopNav, MobileNav } from "@/components/SettingsNav";
+import { TypographyProvider, TypographySettings } from "@/components/TypographySettings";
 
 export function GuideContent() {
   return (
-    <ChecklistProvider>
-      <div className="min-h-screen bg-[#424242] text-zinc-100">
+    <TypographyProvider>
+      <div className="min-h-screen bg-[#101219] text-zinc-100">
+        <Hero />
         <Header />
-        <div className="mx-auto max-w-[1180px] px-4 sm:px-6">
+        <div id="guide" className="mx-auto max-w-[1380px] scroll-mt-20 px-4 sm:px-6 lg:px-8">
           <MobileNav />
-          <div className="grid gap-12 py-10 lg:grid-cols-[230px_minmax(0,760px)] lg:gap-16 lg:py-16">
+          <div className="grid items-start gap-12 py-10 lg:grid-cols-[280px_minmax(0,900px)] lg:gap-16 lg:py-20 xl:gap-24">
             <DesktopNav />
-            <main>
+            <main className="min-w-0">
               <Intro />
               <BeforeInstall />
               <FirstStart />
@@ -27,27 +28,106 @@ export function GuideContent() {
               <Games />
               <Obs />
               <DualBoot />
-              <Rescue />
               <Sources />
             </main>
           </div>
         </div>
       </div>
-    </ChecklistProvider>
+    </TypographyProvider>
+  );
+}
+
+function Hero() {
+  return (
+    <section id="top" className="relative isolate flex min-h-[100svh] overflow-hidden border-b border-white/[0.08]">
+      <div className="hero-grid pointer-events-none absolute inset-0" />
+      <div className="hero-orb pointer-events-none absolute -right-28 top-20 h-[32rem] w-[32rem] rounded-full bg-violet-400/10 blur-3xl" />
+      <div className="hero-orb pointer-events-none absolute -left-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-cyan-300/10 blur-3xl [animation-delay:-4s]" />
+
+      <div className="relative mx-auto flex w-full max-w-[1380px] flex-col px-4 py-6 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          <div className="font-mono text-xs font-bold tracking-[0.18em] text-zinc-200">NOBARA / ТВОЙ ПК</div>
+          <TypographySettings />
+        </div>
+
+        <div className="my-auto grid items-center gap-12 py-16 lg:grid-cols-[minmax(0,1.25fr)_minmax(330px,0.75fr)] lg:gap-20">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-200/15 bg-cyan-200/[0.06] px-4 py-2 text-xs font-semibold text-cyan-100">
+              <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.8)]" />
+              Система установлена. Теперь настраиваем.
+            </div>
+            <div className="shimmer-title mt-8 text-[clamp(4.5rem,13vw,10rem)] font-black leading-[0.78] tracking-[-0.085em]">NOBARA</div>
+            <h1 className="mt-8 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-white sm:text-6xl">
+              Вторая система без повторной установки и шаманства
+            </h1>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl sm:leading-9">
+              Понятный маршрут после Windows 11: проверить загрузку, обновить Nobara, настроить RX 580, игры и эфир на VK Видео Live. Неполадки лежат рядом с основным шагом, а не в подвале сайта.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a href="#guide" className="inline-flex h-14 items-center gap-3 rounded-full bg-white px-7 text-sm font-bold text-[#11131a] shadow-[0_16px_50px_rgba(255,255,255,0.12)] transition hover:-translate-y-0.5 hover:bg-cyan-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+                Открыть весь гайд <ArrowDown className="h-4 w-4" />
+              </a>
+              <a href="#before" className="inline-flex h-14 items-center rounded-full border border-white/15 bg-white/[0.05] px-7 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.09] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+                Сразу к проверке
+              </a>
+            </div>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:justify-self-end">
+            <div className="absolute -inset-10 rounded-full bg-gradient-to-br from-cyan-300/10 to-violet-400/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#181a22]/95 shadow-[0_36px_120px_rgba(0,0,0,0.42)]">
+              <div className="flex items-center justify-between border-b border-white/[0.08] px-6 py-5">
+                <div>
+                  <div className="text-xs font-medium text-zinc-500">Профиль системы</div>
+                  <div className="mt-1 font-semibold text-white">Твоя сборка</div>
+                </div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300/15 to-violet-300/15 text-cyan-100">
+                  <MonitorCog className="h-5 w-5" />
+                </div>
+              </div>
+              <div className="space-y-1 p-3">
+                <HeroRow label="Система" value="Nobara 43 KDE" />
+                <HeroRow label="Процессор" value="Ryzen 5 2600" />
+                <HeroRow label="Графика" value="RX 580 · 8 ГБ" />
+                <HeroRow label="Мониторы" value="75 Гц + 60 Гц" />
+                <HeroRow label="Загрузка" value="Windows 11 рядом" />
+                <HeroRow label="Следующая цель" value="VK Видео Live" accent />
+              </div>
+              <div className="border-t border-white/[0.08] px-6 py-5 text-xs leading-5 text-zinc-500">
+                Один NVMe · общий EFI 200 МБ · 16 ГБ RAM
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#guide" className="mb-2 flex w-fit items-center gap-3 text-xs font-medium text-zinc-500 transition hover:text-zinc-200">
+          Листай к содержанию <ArrowDown className="h-4 w-4 animate-bounce" />
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function HeroRow({ label, value, accent = false }: { label: string; value: string; accent?: boolean }) {
+  return (
+    <div className="flex items-center justify-between gap-5 rounded-2xl px-4 py-3.5 hover:bg-white/[0.035]">
+      <span className="text-sm text-zinc-500">{label}</span>
+      <span className={accent ? "text-sm font-semibold text-cyan-100" : "text-sm font-semibold text-zinc-100"}>{value}</span>
+    </div>
   );
 }
 
 function Header() {
   return (
-    <header className="sticky top-0 z-40 h-14 border-b border-zinc-500/60 bg-[#424242]">
-      <div className="mx-auto flex h-full max-w-[1180px] items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="font-mono text-xs font-semibold tracking-[0.16em] text-white">
+    <header className="sticky top-0 z-40 h-[4.5rem] border-b border-white/[0.08] bg-[#101219]/88 backdrop-blur-2xl">
+      <div className="mx-auto flex h-full max-w-[1380px] items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a href="#top" className="font-mono text-xs font-bold tracking-[0.16em] text-white">
           NOBARA / НАСТРОЙКА
         </a>
-        <div className="hidden font-mono text-[11px] text-zinc-300 sm:block">
-          R5 2600&nbsp;&nbsp;/&nbsp;&nbsp;RX 580 8 ГБ&nbsp;&nbsp;/&nbsp;&nbsp;16 ГБ
+        <div className="flex items-center gap-2">
+          <a href="#guide" className="hidden rounded-full px-4 py-2 text-xs font-semibold text-zinc-400 transition hover:bg-white/[0.05] hover:text-white sm:block">Содержание</a>
+          <TypographySettings compact />
         </div>
-        <div className="w-28 sm:hidden"><ChecklistProgress compact /></div>
       </div>
     </header>
   );
@@ -55,50 +135,34 @@ function Header() {
 
 function Intro() {
   return (
-    <section id="top" className="pb-14 sm:pb-20">
-      <p className="font-mono text-xs text-zinc-300">NOBARA 43 / KDE PLASMA 6 / WAYLAND</p>
-      <h1 className="mt-5 max-w-2xl text-4xl font-semibold leading-[1.05] tracking-[-0.045em] text-white sm:text-6xl">
-        Настройка твоего ПК без лишней херни
-      </h1>
-      <p className="mt-6 max-w-2xl text-[15px] leading-7 text-zinc-200">
-        Этот гайд написан для перехода с Windows 11 на Nobara как на вторую систему. От тебя не требуется заранее знать Fedora, команды Linux или названия пакетных менеджеров. В каждом пункте есть действие, причина, ожидаемый результат и откат там, где он нужен.
+    <section className="pb-10 sm:pb-16">
+      <p className="font-mono text-xs font-semibold tracking-[0.16em] text-cyan-200">КАК ЧИТАТЬ ЭТОТ ГАЙД</p>
+      <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-[-0.05em] text-white sm:text-5xl">
+        Идем сверху вниз один раз, потом открываем только нужный раздел
+      </h2>
+      <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
+        Основной способ всегда идет первым. Сразу под ним лежит блок «если не сработало» с проверкой и откатом. Отдельного кладбища аварийных команд в конце больше нет. Размер текста меняется шестеренкой сверху и сохраняется в браузере.
       </p>
-      <div className="mt-7 border-l-2 border-zinc-200 bg-zinc-700/30 px-4 py-3 text-sm leading-6 text-zinc-100">
-        <strong className="text-white">Текущее состояние:</strong> Nobara уже установлена рядом с Windows на одном NVMe, общий EFI имеет размер 200 МБ, PortProton, Lesta Game Center и Tanks Blitz уже установлены, LACT установлен, но еще не проверен. Гайд не заставляет повторять сделанное. Он объясняет, как проверить результат и что настраивать дальше.
-      </div>
-      <div className="mt-9 grid border-y border-zinc-500/60 sm:grid-cols-4">
-        <Spec label="Процессор" value="Ryzen 5 2600" />
-        <Spec label="Видеокарта" value="RX 580 8 ГБ" />
-        <Spec label="Мониторы" value="75 + 60 Гц" />
-        <Spec label="Система" value="Nobara 43" />
+
+      <div className="mt-10 rounded-[1.75rem] border border-cyan-200/12 bg-gradient-to-br from-cyan-200/[0.07] to-violet-300/[0.035] p-6 sm:p-8">
+        <div className="font-semibold text-white">Что уже есть</div>
+        <p className="mt-3 max-w-3xl leading-7 text-zinc-300">
+          Nobara стоит рядом с Windows на одном NVMe. PortProton, Lesta Game Center и Tanks Blitz установлены. LACT установлен, но еще не проверен. Поэтому гайд не предлагает повторять эти действия и начинает с проверки текущего состояния.
+        </p>
       </div>
 
-      <div className="mt-12 border-t border-zinc-500/60 pt-8">
-        <h2 className="text-xl font-semibold text-white">Сначала переведем Linux на человеческий</h2>
-        <p className="mt-3 text-sm leading-7 text-zinc-200">
-          Nobara основана на Fedora, но это не обычная Fedora с другой картинкой. У нее свой набор измененных пакетов, свое ядро, игровые настройки и собственный механизм обновления. Поэтому случайный совет для Fedora может быть неправильным для Nobara. Тебе не надо изучать Fedora перед стартом. Просто не подменяй команды из этого гайда командами из первого видоса в поиске.
-        </p>
-        <Settings className="mt-5">
-          <Setting label="Проводник Windows" value="Dolphin" />
-          <Setting label="Параметры Windows" value="Параметры системы KDE" />
-          <Setting label="PowerShell или cmd" value="Konsole" />
-          <Setting label="Установщик .exe" value="DNF App Center или Flatpak" />
-          <Setting label="Рабочий стол" value="KDE Plasma" />
-          <Setting label="Вывод картинки" value="Wayland" />
-        </Settings>
-        <p className="mt-5 text-sm leading-7 text-zinc-200">
-          В Windows программа часто приходит отдельным <Code>.exe</Code>. В Linux безопаснее сначала искать ее в магазине пакетов. Магазин знает, откуда взят пакет, ставит зависимости и потом обновляет программу. Скачивать случайные установщики с сайтов здесь обычно не нужно.
-        </p>
-
-        <h3 className="mt-9 text-base font-semibold text-white">Слова, которые встретятся дальше</h3>
-        <dl className="mt-4 border-y border-zinc-500/60">
-          <Term name="Fedora">Linux-система, на технической базе которой собрана Nobara. Nobara сильно изменена, поэтому инструкции Fedora нельзя автоматически считать инструкциями Nobara.</Term>
-          <Term name="KDE Plasma">Интерфейс рабочего стола: панель задач, меню приложений, окна и Параметры системы. Это примерно тот слой, который ты видишь и нажимаешь.</Term>
-          <Term name="Wayland">Современный слой между приложениями, мониторами, видеокартой и устройствами ввода. Он отвечает за вывод окон и движение курсора.</Term>
-          <Term name="Репозиторий">Проверяемый онлайн-каталог пакетов. Nobara подключает свои репозитории и контролируемые снимки Fedora, чтобы приложения и системные компоненты обновлялись согласованно.</Term>
-          <Term name="RPM">Нативный пакет, который становится частью системы. Ядро, драйверы, службы, LACT и нативный OBS ставятся как RPM.</Term>
-          <Term name="DNF App Center">Графический центр RPM-пакетов и системных обновлений Nobara. Он не плохой и не лишний. Просто RPM и Flatpak в нем остаются разными источниками.</Term>
-          <Term name="Flatpak и Flathub">Flatpak - изолированный формат обычных приложений. Flathub - официальный каталог, из которого Nobara берет такие приложения по умолчанию.</Term>
+      <div className="mt-16">
+        <h3 className="text-2xl font-semibold tracking-[-0.03em] text-white">Восемь слов перед стартом</h3>
+        <p className="mt-3 max-w-3xl leading-7 text-zinc-400">Этого словаря достаточно, чтобы не принимать пакетный менеджер за новый лаунчер.</p>
+        <dl className="mt-7 grid gap-4 md:grid-cols-2">
+          <Term name="Nobara и Fedora">Nobara собрана на базе Fedora, но имеет собственные пакеты, ядро и механизм обновления. Случайная команда для Fedora не всегда подходит Nobara.</Term>
+          <Term name="KDE Plasma">Панель, меню, окна и Параметры системы. Это графический интерфейс, который ты видишь после входа.</Term>
+          <Term name="Wayland">Слой, который связывает приложения, мониторы, видеокарту и устройства ввода. Это не отдельный драйвер.</Term>
+          <Term name="Пакет и репозиторий">Пакет - программа в формате установки. Репозиторий - проверенный каталог, откуда система получает пакет и его обновления.</Term>
+          <Term name="RPM">Нативный пакет системы. Ядро, службы, LACT и OBS ставятся в этом формате.</Term>
+          <Term name="DNF App Center">Графический центр RPM-пакетов и штатного обновления Nobara. Flatpak он не обслуживает.</Term>
+          <Term name="Flatpak и Flathub">Flatpak изолирует обычные приложения, а Flathub служит их каталогом. Ставим только для текущего пользователя.</Term>
+          <Term name="Konsole и sudo">Konsole - окно для текстовых команд. Кнопка «Копировать» берет только команду: вставь ее в Konsole и нажми Enter. sudo временно запускает одно действие с правами администратора. При вводе пароля символы не видны - это нормально.</Term>
         </dl>
       </div>
     </section>
@@ -112,13 +176,6 @@ function BeforeInstall() {
         Официальная Nobara Wiki не рекомендует такой вариант до установки, потому что EFI Windows обычно мал для двух систем. Но установка уже загружается, поэтому паниковать, срочно двигать разделы или сносить систему не надо. Сначала смотрим фактическое свободное место. Любая игра, браузер и обычная программа вообще не пишут свои файлы в EFI.
       </Warning>
 
-      <ActionRow id="backup" title="Сохрани ключ BitLocker и важные файлы сейчас">
-        Резервная копия все еще нужна, даже после успешной установки. Сохрани ключ восстановления BitLocker отдельно от этого ПК, скопируй документы и убедись, что хотя бы один важный файл реально открывается из копии. Это защита не только от Linux, но и от неудачного обновления Windows, ошибки диска или собственного слишком уверенного клика.
-        <Disclosure title="Что именно не надо сейчас делать">
-          Не уменьшай и не расширяй EFI на живой системе только потому, что увидел число 200 МБ. Не форматируй его и не удаляй папки <Code>EFI/Microsoft</Code> или <Code>EFI/fedora</Code>. Пока обе системы запускаются, сначала собирают данные и делают копию, а уже потом чинят конкретную проблему.
-        </Disclosure>
-      </ActionRow>
-
       <ActionRow id="usb" title="Оставь установочную флешку как аварийную">
         Не форматируй вчерашнюю флешку хотя бы до нескольких успешных обновлений и перезагрузок обеих систем. С нее можно загрузить живую Nobara, прочитать файлы и восстановить загрузку, если однажды меню пропадет. Если флешка уже стерта, катастрофы нет: образ можно снова скачать с официального сайта и записать через Ventoy, Fedora Media Writer или Rufus в режиме GPT и DD.
         <Disclosure title="Проверить образ перед повторной записью">
@@ -127,20 +184,16 @@ function BeforeInstall() {
         </Disclosure>
       </ActionRow>
 
-      <ActionRow
-        id="install"
-        title="Проверь отдельный /boot и свободное место в EFI"
-        command={"findmnt /boot\nfindmnt /boot/efi\ndf -h /boot /boot/efi"}
-        commandLabel="Только посмотреть разделы и свободное место"
-      >
+      <ActionRow id="install" title="Проверь отдельный /boot и свободное место в EFI">
         В обычной разметке Nobara ядра и большие файлы загрузки находятся в отдельном <Code>/boot</Code>, а <Code>/boot/efi</Code> хранит небольшие UEFI-загрузчики. Поэтому ты прав в главном: одна игра и один браузер EFI не засрут. Количество установленных приложений с размером EFI вообще не связано.
-        <p className="mt-4">В выводе <Code>findmnt</Code> должны быть отдельные точки <Code>/boot</Code> и <Code>/boot/efi</Code>. В строке EFI обычно будет файловая система <Code>vfat</Code>. Команда <Code>df</Code> покажет не номинальные 200 МБ, а сколько реально занято и свободно.</p>
+        <CodeSnippet code={"findmnt /boot\nfindmnt /boot/efi\ndf -h /boot /boot/efi"} label="Только посмотреть разделы и свободное место" className="mt-6" />
+        <p className="mt-5">В выводе <Code>findmnt</Code> должны быть отдельные точки <Code>/boot</Code> и <Code>/boot/efi</Code>. В строке EFI обычно будет файловая система <Code>vfat</Code>. Команда <Code>df</Code> покажет не номинальные 200 МБ, а сколько реально занято и свободно.</p>
         <p className="mt-4">Запомни или сфотографируй свободное место сейчас и сравни после нескольких обновлений ядра. Если заполнение стабильно, ничего не трогай. Если свободное место быстро уменьшается или раздел подходит к 80-90%, не удаляй файлы вручную: сначала покажи вывод команд и разберемся, что именно выросло.</p>
         <Disclosure title="Посмотреть, что занимает EFI, ничего не удаляя">
           <CodeSnippet code="sudo du -h --max-depth=2 /boot/efi | sort -h" label="Безопасный просмотр размеров каталогов EFI" />
         </Disclosure>
         <Disclosure title="Когда отдельный SSD все-таки понадобится">
-          Не сейчас, если все работает. Отдельный SSD имеет смысл при будущей чистой переустановке, постоянной нехватке места в EFI или желании полностью развязать загрузчики Windows и Nobara. Для текущей системы важнее резервная копия и периодическая проверка, чем операция на разделах ради красивой схемы.
+          Не сейчас, если все работает. Отдельный SSD имеет смысл при будущей чистой переустановке, постоянной нехватке места в EFI или желании полностью развязать загрузчики Windows и Nobara. Для текущей системы важнее периодическая проверка свободного места, чем операция на разделах ради красивой схемы.
         </Disclosure>
       </ActionRow>
     </SectionCard>
@@ -154,18 +207,33 @@ function FirstStart() {
         Это стартовая панель самой Nobara, а не реклама. Слева открой <Code>First Steps</Code>. Отсюда запускаются обновление, менеджер драйверов и рекомендованные дополнения. На RX 580 обычный графический драйвер AMD уже находится в системе. <Code>rocm-meta</Code> и экспериментальный <Code>mesa-vulkan-drivers-git</Code> для обычных игр не нужны.
       </ActionRow>
 
-      <ActionRow id="sync" title="Обнови систему правильным способом" command="nobara-sync" commandLabel="Тот же обновлятор через Konsole, без sudo" status="важно">
-        В Nobara Welcome нажми <Code>Update my system</Code>. Откроется Nobara System Updater внутри DNF App Center. Выбери все обновления и запусти установку. Нормальный финал в журнале выглядит как <Code>System update completed successfully</Code>.
-        <p className="mt-4">
-          Не обновляй Nobara обычной командой DNF. Nobara Updater не просто скачивает новые RPM-пакеты. Он проверяет репозитории, синхронизирует версии, применяет исправления Nobara, проверяет кодеки и умеет вернуть пакет к нужной версии, если его откатили в репозитории. Обычный DNF всех этих действий не делает.
-        </p>
-        <Disclosure title="Что такое DNF App Center и nobara-sync">
-          <p><strong className="text-white">DNF App Center</strong> - графическая программа для системных RPM-пакетов и обновлений. <strong className="text-white">nobara-sync</strong> - штатный обновлятор Nobara в терминале. Это два входа в правильный процесс обновления, а не конкурирующие способы.</p>
-          <p className="mt-3">Команду <Code>nobara-sync</Code> запускай без <Code>sudo</Code>. Она сама попросит пароль тогда, когда нужны права администратора. Запуск целиком от root может записать журнал не туда и не увидит пользовательские Flatpak.</p>
+      <ActionRow id="sync" title="Обнови систему штатным способом" status="важно">
+        В Nobara Welcome нажми <Code>Update my system</Code>. Откроется Nobara System Updater внутри DNF App Center. Нажми <Code>Select All and Update</Code> и дождись строки <Code>System Update: System update completed successfully</Code> в журнале.
+        <p className="mt-5">Не обновляй всю Nobara обычной командой DNF. Штатный обновлятор проверяет репозитории, синхронизирует версии, применяет исправления Nobara и умеет вернуть пакет к нужной версии, если его откатили. Обычный DNF всех этих действий не делает.</p>
+        <Disclosure title="Если кнопка Update my system не открывается">
+          <p className="mb-4">Открой Konsole и запусти тот же штатный механизм вручную. <Code>sudo</Code> перед командой не ставь: обновлятор сам попросит пароль в нужный момент.</p>
+          <CodeSnippet code="nobara-sync" label="Запустить Nobara Updater через Konsole" />
+          <p className="mb-4 mt-5">Если синхронизация завершилась конфликтом, используй встроенное восстановление и повтори обычный запуск:</p>
+          <div className="space-y-3">
+            <CodeSnippet code="nobara-sync repair" label="Исправить состояние пакетов" />
+            <CodeSnippet code="nobara-sync" label="Повторить штатное обновление" />
+          </div>
         </Disclosure>
-        <Disclosure title="Нужно обновить систему вместе с Flatpak">
-          <p className="mb-3">Обычный экран обновлений DNF App Center обновляет RPM. Ключ <Code>--all</Code> дополнительно обновит пользовательские Flatpak-приложения.</p>
+        <Disclosure title="Если нужно показать журнал ошибки">
+          <p className="mb-4">Команда берет последний журнал Nobara Updater и отправляет его в сервис npaste. Перед отправкой все равно просмотри текст и убедись, что там нет личных данных.</p>
+          <CodeSnippet code="cat ~/.local/share/nobara-updater/nobara-sync.log | npaste" label="Получить ссылку на журнал обновления" />
+        </Disclosure>
+        <Disclosure title="Обновить RPM и пользовательские Flatpak вместе">
+          <p className="mb-4">DNF App Center обновляет RPM. Ключ <Code>--all</Code> дополнительно обновит Flatpak-приложения текущего пользователя.</p>
           <CodeSnippet code="nobara-sync --all" label="RPM и Flatpak одной командой" />
+        </Disclosure>
+        <Disclosure title="После обновления одна из частей системы не запускается">
+          <p className="mb-4">Сначала посмотри, есть ли упавшая служба, и серьезные сообщения только текущей загрузки. Эти команды ничего не исправляют и не удаляют.</p>
+          <div className="space-y-3">
+            <CodeSnippet code="systemctl --failed" label="Показать службы, которые не смогли запуститься" />
+            <CodeSnippet code="journalctl -b -p err..alert --no-pager" label="Показать серьезные ошибки текущей загрузки" />
+          </div>
+          <p className="mt-4">Пустой список служб - хороший результат. Красная строка в журнале еще не доказывает причину: смотри время, имя службы и действие прямо перед ошибкой. Не вставляй первую попавшуюся команду из старого ответа для Fedora.</p>
         </Disclosure>
       </ActionRow>
 
@@ -173,12 +241,7 @@ function FirstStart() {
         Кодеки нужны системе, чтобы читать и записывать H.264, H.265 и другие распространенные форматы. Без них может не воспроизводиться видео, не работать аппаратное кодирование OBS или появиться черный экран в браузере. Nobara сама показывает этот вопрос во время первого обновления. Нажми <strong className="text-white">YES</strong> и дождись завершения.
       </ActionRow>
 
-      <ActionRow
-        id="apps"
-        title="Поставь qBittorrent, Vesktop и Chrome через Flatpak"
-        command="flatpak install --user flathub org.qbittorrent.qBittorrent dev.vencord.Vesktop com.google.Chrome"
-        commandLabel="Три приложения из Flathub, только для твоего пользователя"
-      >
+      <ActionRow id="apps" title="Поставь qBittorrent, Vesktop и Chrome через Flatpak">
         <p>
           <strong className="text-white">Flatpak</strong> - отдельный формат приложений. Программа приходит вместе с подходящей средой выполнения и запускается с ограниченным доступом к системе. <strong className="text-white">Flathub</strong> - основной каталог Flatpak, который в Nobara уже включен по умолчанию. Nobara не подключает урезанные Fedora Flatpak-репозитории, а использует официальный Flathub.
         </p>
@@ -193,6 +256,16 @@ function FirstStart() {
         <p className="mt-4">
           Если хочется графический Flatpak-магазин, открой Nobara Welcome - <Code>Recommended Additions</Code> и поставь <Code>Bazaar</Code>. В некоторых установках уже есть <Code>Flatpost</Code>, он решает ту же задачу. Найди приложения по названию и выбери установку для пользователя. Discover на этом ПК удален, возвращать его ради Flatpak не нужно.
         </p>
+
+        <CodeSnippet code="flatpak install --user flathub org.qbittorrent.qBittorrent dev.vencord.Vesktop com.google.Chrome" label="Три приложения из Flathub, только для твоего пользователя" className="mt-6" />
+        <p className="mt-5">Подтверди список клавишей <Code>Y</Code>, если Flatpak спросит разрешение. После установки все три программы появятся в меню Plasma. Запусти каждую один раз. Если Chrome и Vesktop открываются, а qBittorrent показывает главное окно, установка закончена.</p>
+        <Disclosure title="Если команда пишет, что репозиторий flathub не найден">
+          <p className="mb-4">В нормальной Nobara Flathub уже подключен. Если его запись пропала, верни официальный репозиторий только для своей учетной записи, а затем повтори установку.</p>
+          <div className="space-y-3">
+            <CodeSnippet code="flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo" label="Вернуть пользовательский Flathub" />
+            <CodeSnippet code="flatpak install --user flathub org.qbittorrent.qBittorrent dev.vencord.Vesktop com.google.Chrome" label="Повторить установку" />
+          </div>
+        </Disclosure>
 
         <Settings className="mt-5">
           <Setting label="DNF App Center" value="RPM-пакеты и система" />
@@ -210,10 +283,9 @@ function FirstStart() {
           Steam, Lutris, Gamescope, MangoHud, OBS Studio, Prism Launcher, Blender и Kdenlive официальная Wiki советует ставить из репозиториев Nobara. Им важны драйверы, аппаратное кодирование, игровые хуки или плагины. Для них открывай DNF App Center или Recommended Additions, а не Flathub.
         </Disclosure>
 
-        <p className="mt-4">После установки все три программы появятся в меню Plasma. Запусти каждую один раз. Если Chrome и Vesktop открываются, а qBittorrent показывает главное окно, формат и графика работают нормально.</p>
         <Disclosure title="Как обновить или удалить эти Flatpak">
           <div className="space-y-3">
-            <CodeSnippet code="flatpak update -y" label="Обновить все Flatpak твоего пользователя" />
+            <CodeSnippet code="flatpak update --user -y" label="Обновить все Flatpak твоего пользователя" />
             <CodeSnippet code="flatpak uninstall --user org.qbittorrent.qBittorrent dev.vencord.Vesktop com.google.Chrome" label="Удалить эти три приложения" />
           </div>
         </Disclosure>
@@ -269,37 +341,41 @@ function Display() {
 function Lact() {
   return (
     <SectionCard id="lact" number="04" title="RX 580 и LACT" description="LACT уже установлен. Сначала проверяем службу, карту и датчики, только потом разрешаем управление напряжением.">
-      <ActionRow
-        id="lact-install"
-        title="Проверь установленный LACT и службу lactd"
-        command={"rpm -q lact\nsystemctl is-enabled lactd\nsystemctl is-active lactd"}
-        commandLabel="Проверить пакет, автозапуск и текущее состояние"
-      >
-        Переустанавливать LACT не надо. Первая строка должна показать имя и версию пакета, вторая - <Code>enabled</Code>, третья - <Code>active</Code>. Затем открой LACT из меню Plasma. В окне должны определиться RX 580, текущая температура, частота ядра и скорость вентиляторов.
+      <ActionRow id="lact-install" title="Проверь установленный LACT и службу lactd">
+        LACT уже стоит, поэтому переустанавливать его поверх рабочей системы не надо. Сначала открой Konsole и проверь пакет, автозапуск фоновой службы и ее текущее состояние.
+        <CodeSnippet code={"rpm -q lact\nsystemctl is-enabled lactd\nsystemctl is-active lactd"} label="Проверить пакет, автозапуск и текущее состояние" className="mt-6" />
+        <p className="mt-5">Первая строка должна показать имя и версию пакета, вторая - <Code>enabled</Code>, третья - <Code>active</Code>. Затем открой LACT из меню Plasma. В окне должны определиться RX 580, текущая температура, частота ядра и скорость вентиляторов.</p>
         <p className="mt-4">Пока это просто проверка. Не нажимай «Применить» и не включай автоматическую загрузку профиля, если не сохранил исходные значения. Скриншот стартового экрана LACT уже будет нормальной точкой отката.</p>
         <Disclosure title="Пакет есть, но служба inactive или disabled">
-          <CodeSnippet code="sudo systemctl enable --now lactd" label="Включить lactd сейчас и при следующих загрузках" />
-          <p className="mt-3">После команды снова открой LACT. Если служба стала <Code>active</Code>, переустановка не нужна.</p>
+          <p className="mb-4">Включи службу сейчас и добавь ее в автозапуск. Затем снова проверь статус и открой LACT.</p>
+          <div className="space-y-3">
+            <CodeSnippet code="sudo systemctl enable --now lactd" label="Включить lactd сейчас и при следующих загрузках" />
+            <CodeSnippet code="systemctl is-active lactd" label="Убедиться, что ответ теперь active" />
+          </div>
+        </Disclosure>
+        <Disclosure title="Служба не запускается или LACT не видит карту">
+          <p className="mb-4">Последние 80 строк журнала обычно называют причину. Эта команда ничего не меняет.</p>
+          <CodeSnippet code="journalctl -u lactd -b --no-pager -n 80" label="Посмотреть журнал lactd текущей загрузки" />
+          <p className="mb-4 mt-5">Если после включения службы появились проблемы, останови ее и убери из автозапуска. Управление драйвером AMD вернется к обычным настройкам ядра.</p>
+          <CodeSnippet code="sudo systemctl disable --now lactd" label="Отключить службу LACT" />
         </Disclosure>
         <Disclosure title="Только если rpm сообщает, что LACT не установлен">
+          <p className="mb-4">Тогда установленного пакета действительно нет. Поставь нативную версию из репозитория Nobara и включи службу.</p>
           <CodeSnippet code={"sudo dnf install lact -y\nsudo systemctl enable --now lactd"} label="Запасная установка из репозитория Nobara" />
-          <p className="mt-3">Сторонний COPR для LACT не подключай. Сначала используется пакет из репозитория Nobara.</p>
+          <p className="mt-3">Сторонний COPR для LACT не подключай. Для этой утилиты сначала используется пакет из репозитория Nobara.</p>
         </Disclosure>
       </ActionRow>
 
-      <ActionRow
-        id="lact-mask"
-        title="Если напряжение скрыто, разреши управление RX 580"
-        command="sudo grubby --update-kernel=ALL --args='amdgpu.ppfeaturemask=0xfffd7fff'"
-        commandLabel="Добавить параметр ко всем ядрам и потом перезагрузиться"
-        status="только при необходимости"
-      >
-        Сначала открой вкладку настройки GPU в LACT. Если управление напряжением уже доступно, эту команду пропусти. Если ползунков нет, драйвер AMD скрывает ручное управление. Команда добавит параметр ядра для карт Polaris, к которым относится RX 580. После выполнения полностью перезагрузи ПК и снова открой LACT.
+      <ActionRow id="lact-mask" title="Если напряжение скрыто, разреши управление RX 580" status="только при необходимости">
+        Сначала открой вкладку настройки GPU в LACT. Если управление напряжением уже доступно, весь этот шаг пропусти. Если ползунков нет, драйвер AMD скрывает ручное управление. Для RX 580 на архитектуре Polaris можно добавить условный параметр ядра.
+        <CodeSnippet code="sudo grubby --update-kernel=ALL --args='amdgpu.ppfeaturemask=0xfffd7fff'" label="Добавить параметр ко всем ядрам" className="mt-6" />
+        <p className="mt-5">Полностью перезагрузи ПК и снова открой LACT. Ползунки напряжения должны появиться. Убедиться, что ядро действительно получило параметр, можно без изменения системы:</p>
+        <CodeSnippet code="cat /proc/cmdline | grep -o 'amdgpu.ppfeaturemask=[^ ]*'" label="Проверить параметр после перезагрузки" className="mt-4" />
         <Disclosure title="Что означает маска 0xfffd7fff">
           Маска открывает управление питанием и напряжением, но не включает вообще все экспериментальные функции подряд. Для Polaris это консервативнее, чем маска из одних единиц. Она также отключает GFXOFF и Stutter Mode, поэтому на отдельных картах может немного вырасти потребление в простое.
         </Disclosure>
-        <Disclosure title="После команды появились проблемы">
-          <p className="mb-3">Удали ровно тот же параметр, перезагрузи ПК и проверь систему без него.</p>
+        <Disclosure title="Ползунки не появились или после команды начались проблемы">
+          <p className="mb-4">Если проверка выше ничего не вывела, параметр не применился - не переходи к андервольту. Если появились черный экран, артефакты, странности двух мониторов или выросло потребление, удали ровно тот же параметр и перезагрузи ПК.</p>
           <CodeSnippet code="sudo grubby --update-kernel=ALL --remove-args='amdgpu.ppfeaturemask=0xfffd7fff'" label="Полный откат параметра" />
         </Disclosure>
       </ActionRow>
@@ -328,14 +404,16 @@ function Lact() {
 function Games() {
   return (
     <SectionCard id="games" number="05" title="Игры без привязки к одному лаунчеру" description="PortProton, Lesta Game Center и Tanks Blitz уже стоят. Используем их как контрольный пример, а дальше строим понятную схему для любой игры.">
-      <ActionRow
-        id="portproton"
-        title="Проверь уже установленную игровую основу"
-        command="rpm -q portproton"
-        commandLabel="Посмотреть версию RPM-пакета PortProton"
-      >
+      <ActionRow id="portproton" title="Проверь уже установленную игровую основу">
         Открой PortProton из меню Plasma, затем запусти уже установленный Lesta Game Center и из него Tanks Blitz. Ничего не переустанавливай поверх рабочей копии. Задача этого прохода - убедиться, что лаунчер входит в аккаунт, игра показывает картинку, слышит звук и нормально закрывается обратно в PortProton.
-        <p className="mt-4">Команда покажет версию PortProton, если он установлен как RPM. Если она отвечает <Code>package portproton is not installed</Code>, но программа открывается, значит ее могли поставить другим способом. Это не повод удалять рабочую установку: сначала посмотри свойства ярлыка и откуда он запускается.</p>
+        <p className="mt-4">Если хочется уточнить тип установки PortProton, проверь RPM-пакет:</p>
+        <CodeSnippet code="rpm -q portproton" label="Посмотреть версию RPM-пакета PortProton" className="mt-4" />
+        <p className="mt-4">Команда покажет имя и версию, если PortProton установлен как RPM. Ответ <Code>package portproton is not installed</Code> при рабочем приложении означает, что его могли поставить другим способом. Это не повод удалять рабочую установку: сначала посмотри свойства ярлыка и откуда он запускается.</p>
+        <Disclosure title="PortProton открывается, но игры не показывают картинку">
+          <p className="mb-4">Убедись, что Vulkan видит RX 580. В сводке должно быть имя AMD Radeon RX 580 и версии Vulkan. Команда ничего не меняет.</p>
+          <CodeSnippet code="vulkaninfo --summary" label="Проверить Vulkan и видеокарту" />
+          <p className="mt-4">Если команды нет, установи утилиту <Code>vulkan-tools</Code> через DNF App Center. Если RX 580 отсутствует в выводе, сначала закончи штатное обновление Nobara и перезагрузи ПК. Не ставь случайный драйвер с сайта AMD поверх Mesa.</p>
+        </Disclosure>
         <Settings className="mt-5">
           <Setting label="PortProton" value="Оболочка для Windows-программ" />
           <Setting label="Lesta Game Center" value="Уже установленный лаунчер-пример" />
@@ -368,13 +446,15 @@ function Games() {
             <li>Смени только версию Proton/Wine и повтори тест. Если стало хуже, верни прошлую.</li>
             <li>Для сетевой игры отдельно проверь античит и состояние серверов.</li>
           </ol>
-          <p className="mt-3">Скрин последней ошибки и журнал полезнее сообщения «не запускается». В журнале не публикуй токены, логины и полный путь, если в нем видно настоящее имя.</p>
+          <p className="mt-3">Скрин последней ошибки и журнал полезнее сообщения «не запускается». Если окно исчезло без сообщения, сразу после сбоя сохрани журнал пользовательского сеанса:</p>
+          <CodeSnippet code="journalctl --user -b --since '-10 min' --no-pager" label="События приложений за последние 10 минут" className="mt-4" />
+          <p className="mt-3">Перед публикацией журнала убери токены, логины и полный путь, если в нем видно настоящее имя.</p>
         </Disclosure>
         <Disclosure title="Игра лежит на диске Windows">
           Сам установщик можно прочитать с NTFS, но префикс лучше создать на ext4 или btrfs. Wine активно использует права доступа и ссылки Linux, которых на NTFS нет. Если появилась странная ошибка прав или файлов, первым делом перенеси префикс на Linux-раздел. Не используй один и тот же префикс одновременно из Windows и Nobara.
         </Disclosure>
         <Disclosure title="Удалить сломанный префикс и начать заново">
-          В PortProton выбери именно префикс проблемной игры и используй его штатное удаление. Это сотрет виртуальный диск C, настройки и локальные сохранения внутри него, но не обязано удалить файлы самой игры. Сначала скопируй сохранения. Никогда не удаляй папку руками, пока не сверил ее путь.
+          В PortProton выбери именно префикс проблемной игры и используй его штатное удаление. Это сотрет виртуальный диск C, настройки и локальные сохранения внутри него, но не обязано удалить файлы самой игры. Сначала убедись, что облачная синхронизация игры завершилась. Никогда не удаляй папку руками, пока не сверил ее путь.
         </Disclosure>
         <Disclosure title="Как захватывать разные игры в OBS">
           Для Vulkan, DXVK и VKD3D нативная сборка OBS Nobara включает Game Capture глобально. Для OpenGL-игры из Steam добавь параметр ниже. Если конкретная игра все равно не ловится, используй захват окна, а не всего экрана с уведомлениями и личной перепиской.
@@ -437,7 +517,9 @@ function Obs() {
           В Источниках нажми <Code>+</Code>, выбери <Code>Браузер</Code> и вставь приватную ссылку виджета DonationAlerts. CEF уже входит в нативную сборку OBS от Nobara, отдельный браузерный плагин с левого сайта не нужен. Не показывай адрес виджета на стриме и не публикуй его вместе с коллекцией сцен.
         </Disclosure>
         <Disclosure title="Если пропал весь звук в OBS">
-          Сначала проверь, не выключен ли источник значком динамика и двигается ли его шкала. Затем выбери источник приложения заново. Перезапуск PipeWire из аварийного раздела нужен только если звук исчез во всей системе, а не когда ты случайно нажал Mute. Не надо чинить сервер, если виновата одна кнопка.
+          <p className="mb-4">Сначала проверь, не выключен ли источник значком динамика и двигается ли его шкала. Затем выбери приложение в свойствах источника заново. Если звука нет только в OBS, PipeWire не перезапускай - не надо чинить сервер, если виновата одна кнопка.</p>
+          <p className="mb-4">Только если звук исчез во всей системе, перезапусти три звуковые службы своего сеанса. На несколько секунд звук пропадет, затем устройства должны появиться снова.</p>
+          <CodeSnippet code="systemctl --user restart pipewire pipewire-pulse wireplumber" label="Перезапустить звук без перезагрузки ПК" />
         </Disclosure>
       </ActionRow>
 
@@ -452,8 +534,8 @@ function Obs() {
           <Setting label="Звук идет дважды" value="Отключить Desktop Audio или дубль источника" />
         </Settings>
         <p className="mt-4">Для стрима в 60 FPS ограничь игру на 60 FPS хотя бы на тест. Монитор Acer умеет 75 Гц, но забитая под 100% RX 580 не оставит OBS места на сборку кадра. Ровные 60 для зрителя лучше, чем 75 у тебя плюс презентация PowerPoint в эфире.</p>
-        <Disclosure title="Что сохранить после удачного теста">
-          В OBS экспортируй профиль и коллекцию сцен через верхние меню Профиль и Коллекция сцен. Храни копию локально. Архив со сценами может содержать приватные URL браузерных виджетов, поэтому не загружай его в публичное облако или GitHub. Сам ключ VK безопаснее не хранить в заметках вообще.
+        <Disclosure title="Перед первым настоящим эфиром">
+          Дай профилю и коллекции сцен понятные названия, еще раз проверь микрофон, игру и Browser Source. Не публикуй коллекцию сцен: внутри могут находиться приватные URL браузерных виджетов. Сам ключ VK безопаснее не хранить в заметках вообще.
         </Disclosure>
         <Disclosure title="Как откатить неудачную настройку качества">
           Верни стартовые 1280x720, 60 FPS и 5000 Кбит/с, перезапусти OBS и повтори тот же участок игры. Если проблема исчезла, повышай только один параметр за тест. Если не исчезла, проверь статистику: уменьшение битрейта не лечит перегрузку рендера, а снижение графики не лечит плохой Wi-Fi.
@@ -470,22 +552,21 @@ function DualBoot() {
         У тебя обе системы уже загружаются с одного NVMe и общего EFI. Не меняй разметку ради этого раздела. Здесь мы только согласуем часы и меню запуска, а состояние EFI контролируем командами из первого раздела.
       </Warning>
 
-      <ActionRow
-        id="windows-time"
-        title="Отключи Fast Startup и переведи Windows в UTC"
-        command={'reg add "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f'}
-        commandLabel="Windows Terminal от администратора: хранить аппаратные часы в UTC"
-      >
-        Linux хранит аппаратные часы в UTC, а Windows по умолчанию считает их местным временем. Из-за этого после переключения системы часы могут уезжать. Команда меняет правило Windows, а не часовой пояс.
+      <ActionRow id="windows-time" title="Отключи Fast Startup и переведи Windows в UTC">
+        Linux хранит аппаратные часы в UTC, а Windows по умолчанию считает их местным временем. Из-за этого после переключения системы часы могут уезжать. Отдельно Fast Startup сохраняет часть состояния Windows на диск вместо полного выключения: Nobara после этого может увидеть NTFS-раздел как небезопасно закрытый и отказаться писать на него.
+        <p className="mt-5">Загрузи Windows, нажми правой кнопкой по кнопке Пуск и открой Терминал от имени администратора. Выполни две команды по очереди:</p>
         <div className="mt-4 space-y-3">
-          <CodeSnippet code="powercfg /h off" label="Windows Terminal от администратора: отключить гибернацию и Fast Startup" />
-          <CodeSnippet code="timedatectl set-local-rtc 0" label="Konsole в Nobara: оставить режим UTC" />
+          <CodeSnippet code="powercfg /h off" label="Отключить гибернацию и Fast Startup" />
+          <CodeSnippet code={'reg add "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f'} label="Хранить аппаратные часы в UTC" />
         </div>
-        <p className="mt-4">Fast Startup сохраняет часть состояния Windows на диск вместо полного выключения. Linux после этого может увидеть NTFS-раздел как небезопасно закрытый и отказаться писать на него. После команд полностью перезагрузи обе системы.</p>
+        <p className="mt-5">Windows должна ответить, что операция выполнена успешно. Полностью выключи ее, загрузи Nobara и оставь Linux в обычном режиме UTC:</p>
+        <CodeSnippet code={"timedatectl set-local-rtc 0\ntimedatectl status"} label="Konsole в Nobara: применить и проверить UTC" className="mt-4" />
+        <p className="mt-4">В проверке ожидается <Code>RTC in local TZ: no</Code>. После полной перезагрузки обе системы должны показывать одно правильное местное время, а NTFS-разделы Windows не должны оставаться заблокированными Fast Startup.</p>
         <Disclosure title="Вернуть стандартные часы Windows и гибернацию">
+          <p className="mb-4">В Windows снова открой Терминал от имени администратора и выполни обе команды:</p>
           <div className="space-y-3">
-            <CodeSnippet code={'reg delete "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\TimeZoneInformation" /v RealTimeIsUniversal /f'} label="Windows Terminal от администратора: удалить настройку UTC" />
-            <CodeSnippet code="powercfg /h on" label="Windows Terminal от администратора: вернуть гибернацию" />
+            <CodeSnippet code={'reg delete "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\TimeZoneInformation" /v RealTimeIsUniversal /f'} label="Удалить настройку UTC" />
+            <CodeSnippet code="powercfg /h on" label="Вернуть гибернацию" />
           </div>
         </Disclosure>
       </ActionRow>
@@ -497,49 +578,22 @@ function DualBoot() {
           <CodeSnippet code="sudo sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=10/' /etc/default/grub" label="Ждать выбор 10 секунд" />
           <CodeSnippet code="sudo grub2-mkconfig -o /boot/grub2/grub.cfg" label="Применить конфигурацию" />
         </div>
-        <p className="mt-4">После перезагрузки должны появиться пункты Nobara и Windows Boot Manager. Если Windows нет, не форматируй EFI и не копируй случайные команды восстановления загрузчика. Сначала проверь, виден ли Windows Boot Manager в Boot Menu самой платы.</p>
+        <p className="mt-4">После перезагрузки меню должно показываться около 10 секунд, а внутри должны быть Nobara и Windows Boot Manager.</p>
+        <Disclosure title="Меню есть, но пункта Windows Boot Manager нет">
+          <p className="mb-4">Не форматируй EFI и не копируй случайные команды восстановления загрузчика. Сначала посмотри записи UEFI и файлы общего EFI-раздела. Команды ниже ничего не меняют.</p>
+          <div className="space-y-3">
+            <CodeSnippet code="sudo efibootmgr -v" label="Показать загрузочные записи платы" />
+            <CodeSnippet code="find /boot/efi/EFI -maxdepth 2 -type f" label="Показать файлы загрузчиков в EFI" />
+          </div>
+          <p className="mt-4">Если запись Windows Boot Manager есть, проверь ее через Boot Menu платы и еще раз пересобери GRUB последней командой основного способа. Если записи нет или Windows не запускается даже из Boot Menu, загружайся с сохраненной флешки и сначала сохраняй вывод этих проверок. Не удаляй каталог <Code>EFI/Microsoft</Code>.</p>
+        </Disclosure>
+        <Disclosure title="Меню GRUB вообще не появилось">
+          Открой Boot Menu платы Gigabyte и проверь, выбран ли загрузчик Nobara первым. Если Nobara запускается из Boot Menu, сама система цела: вернись сюда и повтори три команды выше. Если не запускается ни одна запись, используй живую флешку из первого раздела для диагностики, а не для повторной установки.
+        </Disclosure>
         <Disclosure title="Снова скрывать меню после успешного запуска">
           <CodeSnippet code="sudo grub2-editenv - set menu_auto_hide=1" label="Вернуть автоматическое скрытие GRUB" />
         </Disclosure>
       </ActionRow>
-    </SectionCard>
-  );
-}
-
-function Rescue() {
-  return (
-    <SectionCard id="rescue" number="08" title="Если что-то сломалось" description="Сначала мягкое действие, потом жесткое. Каждая команда ниже делает одну понятную вещь.">
-      <CommandItem
-        title="Обновление Nobara зависло или показывает конфликт"
-        description="Повторно запускает штатную синхронизацию пакетов и исправления Nobara. Команда сама запросит пароль при необходимости."
-        code="nobara-sync"
-      />
-      <CommandItem
-        title="Пропал звук или приложения перестали видеть устройства"
-        description="Перезапускает PipeWire, совместимый слой PulseAudio и менеджер звуковых устройств только в твоем сеансе. Перезагрузка ПК обычно не нужна."
-        code="systemctl --user restart pipewire pipewire-pulse wireplumber"
-      />
-      <CommandItem
-        title="Зависла одна игра через Wine"
-        description="Просит сервер Wine завершить процессы текущих Windows-приложений. Начинай с этого варианта."
-        code="wineserver -k"
-      />
-      <CommandItem
-        title="Wine и PortProton вообще не реагируют"
-        description="Принудительно убивает перечисленные процессы. Несохраненные данные в запущенных Windows-программах пропадут, поэтому это последний способ, а не кнопка выхода."
-        code="killall -9 portproton wine xwininfo"
-        danger
-      />
-      <CommandItem
-        title="Посмотреть серьезные ошибки текущей загрузки"
-        description="Показывает ошибки от момента последнего запуска системы. Красная строка не всегда означает причину проблемы, читай время и имя службы."
-        code="journalctl -b -p err..alert"
-      />
-      <CommandItem
-        title="Посмотреть службы, которые не смогли запуститься"
-        description="Выводит только упавшие системные службы. Если список пуст, systemd не видит проваленных служб."
-        code="systemctl --failed"
-      />
     </SectionCard>
   );
 }
@@ -560,12 +614,14 @@ function Sources() {
   ];
 
   return (
-    <footer className="border-t border-zinc-500/60 py-10">
-      <p className="text-xs leading-5 text-zinc-300">Если после крупного обновления название или путь изменились, сначала смотри официальную Wiki. Nobara меняется быстрее, чем старые ролики и случайные ответы в поиске.</p>
-      <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+    <footer className="mb-10 mt-16 rounded-[2rem] border border-white/[0.08] bg-gradient-to-br from-white/[0.045] to-transparent p-6 sm:p-8">
+      <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-200">Официальные источники</div>
+      <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white">Проверяй свежие названия здесь</h2>
+      <p className="mt-3 max-w-3xl leading-7 text-zinc-400">После крупного обновления название или путь могут измениться. Сначала смотри официальную Wiki: Nobara меняется быстрее, чем старые ролики и случайные ответы в поиске.</p>
+      <div className="mt-7 flex flex-wrap gap-2.5">
         {links.map(([label, href]) => (
-          <a key={href} href={href} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-xs text-zinc-200 hover:text-white">
-            {label}<ExternalLink className="h-3 w-3" />
+          <a key={href} href={href} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full border border-white/[0.09] bg-black/10 px-4 py-2.5 text-sm text-zinc-300 transition hover:-translate-y-0.5 hover:border-cyan-200/20 hover:bg-cyan-200/[0.045] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+            {label}<ExternalLink className="h-3.5 w-3.5" />
           </a>
         ))}
       </div>
@@ -573,54 +629,32 @@ function Sources() {
   );
 }
 
-function Spec({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="border-b border-zinc-500/60 px-0 py-4 last:border-b-0 sm:border-b-0 sm:border-r sm:px-4 sm:first:pl-0 sm:last:border-r-0">
-      <div className="font-mono text-[9px] uppercase tracking-wider text-zinc-300">{label}</div>
-      <div className="mt-1 text-xs font-medium text-white">{value}</div>
-    </div>
-  );
-}
-
 function Term({ name, children }: { name: string; children: React.ReactNode }) {
   return (
-    <div className="grid gap-2 border-b border-zinc-500/60 py-4 last:border-b-0 sm:grid-cols-[150px_1fr] sm:gap-5">
-      <dt className="font-mono text-xs font-semibold text-white">{name}</dt>
-      <dd className="text-sm leading-6 text-zinc-200">{children}</dd>
+    <div className="rounded-2xl border border-white/[0.075] bg-white/[0.025] p-5 transition hover:border-cyan-200/15 hover:bg-cyan-200/[0.025]">
+      <dt className="font-mono text-sm font-semibold text-cyan-100">{name}</dt>
+      <dd className="mt-3 leading-7 text-zinc-300">{children}</dd>
     </div>
   );
 }
 
 function Code({ children }: { children: React.ReactNode }) {
-  return <code className="border border-zinc-500/60 bg-[#303030] px-1.5 py-0.5 font-mono text-[12px] text-white">{children}</code>;
+  return <code className="rounded-md border border-white/10 bg-black/25 px-1.5 py-0.5 font-mono text-[0.84em] text-cyan-50">{children}</code>;
 }
 
 function Settings({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`border border-zinc-500/60 ${className}`}>{children}</div>;
+  return <div className={`overflow-hidden rounded-2xl border border-white/[0.09] bg-black/10 ${className}`}>{children}</div>;
 }
 
 function Setting({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-5 border-b border-zinc-500/60 px-4 py-3 text-sm last:border-b-0">
-      <span className="text-zinc-300">{label}</span>
-      <span className="text-right font-medium text-white">{value}</span>
+    <div className="flex flex-col gap-1 border-b border-white/[0.08] px-5 py-4 text-sm last:border-b-0 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+      <span className="text-zinc-400">{label}</span>
+      <span className="font-medium text-white sm:text-right">{value}</span>
     </div>
   );
 }
 
 function Warning({ children }: { children: React.ReactNode }) {
-  return <div className="mb-6 border-l-2 border-red-400 bg-red-950/20 px-4 py-3 text-sm leading-6 text-zinc-100"><span className="font-semibold text-red-200">Стоп. </span>{children}</div>;
-}
-
-function CommandItem({ title, description, code, danger = false }: { title: string; description: string; code: string; danger?: boolean }) {
-  return (
-    <div className="border-t border-zinc-500/60 py-6 first:border-t-0 first:pt-0">
-      <div className="flex items-center gap-2">
-        {danger && <RotateCcw className="h-3.5 w-3.5 text-red-200" />}
-        <h3 className="text-sm font-semibold text-white">{title}</h3>
-      </div>
-      <p className="mt-2 text-sm leading-6 text-zinc-200">{description}</p>
-      <CodeSnippet code={code} label={danger ? "Только если мягкий способ не помог" : "Konsole"} className="mt-3" />
-    </div>
-  );
+  return <div className="mb-8 rounded-2xl border border-amber-300/15 bg-amber-300/[0.055] px-5 py-4 leading-7 text-zinc-200 sm:px-6"><span className="font-semibold text-amber-100">Сначала без резких движений. </span>{children}</div>;
 }

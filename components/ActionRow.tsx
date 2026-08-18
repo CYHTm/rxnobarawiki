@@ -1,30 +1,20 @@
-import type { ChecklistId } from "@/components/Checklist";
-import { ChecklistToggle } from "@/components/Checklist";
-import { CodeSnippet } from "@/components/CodeSnippet";
-import { cn } from "@/lib/utils";
-
 interface ActionRowProps {
-  id: ChecklistId;
+  id: string;
   title: string;
   children: React.ReactNode;
-  command?: string;
-  commandLabel?: string;
   status?: string;
-  danger?: boolean;
 }
 
-export function ActionRow({ id, title, children, command, commandLabel, status, danger = false }: ActionRowProps) {
+export function ActionRow({ id, title, children, status }: ActionRowProps) {
   return (
-    <div className="grid grid-cols-[24px_1fr] gap-4 border-t border-zinc-500/60 py-6 first:border-t-0 first:pt-0">
-      <ChecklistToggle id={id} label={title} />
-      <div className="min-w-0">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className="text-[15px] font-semibold text-white">{title}</h3>
-          {status && <span className={cn("font-mono text-[10px] uppercase tracking-wider", danger ? "text-red-200" : "text-zinc-300")}>{status}</span>}
-        </div>
-        <div className="mt-2 text-sm leading-6 text-zinc-200">{children}</div>
-        {command && <CodeSnippet code={command} label={commandLabel} className="mt-4" />}
+    <article id={`action-${id}`} className="action-panel scroll-mt-28 rounded-[1.75rem] border border-white/[0.09] bg-[#191b22] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.16)] sm:p-8 lg:p-10">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <h3 className="max-w-2xl text-xl font-semibold leading-tight tracking-[-0.025em] text-white sm:text-2xl">{title}</h3>
+        {status && (
+          <span className="rounded-full border border-cyan-300/20 bg-cyan-300/8 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-cyan-100">{status}</span>
+        )}
       </div>
-    </div>
+      <div className="guide-copy mt-5 text-[1rem] leading-[1.8] text-zinc-300">{children}</div>
+    </article>
   );
 }

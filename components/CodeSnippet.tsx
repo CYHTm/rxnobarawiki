@@ -29,15 +29,15 @@ export function CodeSnippet({ code, label = "Konsole", className }: CodeSnippetP
   }
 
   return (
-    <div className={cn("border border-zinc-500/60 bg-[#303030]", className)}>
-      <div className="flex min-h-10 items-center justify-between border-b border-zinc-500/60 px-3">
-        <span className="text-[11px] font-medium text-zinc-300">{label}</span>
-        <button type="button" onClick={copy} className="flex h-8 items-center gap-2 px-2 text-xs text-zinc-300 hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white" aria-label="Скопировать команду">
-          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-          {copied ? "Готово" : "Копировать"}
+    <div className={cn("overflow-hidden rounded-2xl border border-white/10 bg-[#0e1016] shadow-inner shadow-black/30", className)}>
+      <div className="flex min-h-12 items-center justify-between border-b border-white/[0.08] px-4 sm:px-5">
+        <span className="text-xs font-medium text-zinc-400">{label}</span>
+        <button type="button" onClick={copy} className="flex h-9 items-center gap-2 rounded-full px-3 text-xs font-semibold text-zinc-300 transition hover:bg-white/[0.07] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300" aria-label="Скопировать команду">
+          {copied ? <Check className="h-3.5 w-3.5 text-cyan-200" /> : <Copy className="h-3.5 w-3.5" />}
+          {copied ? "Скопировано" : "Копировать"}
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 font-mono text-[13px] leading-6 text-white selection:bg-white selection:text-black"><code>{code}</code></pre>
+      <pre className="overflow-x-auto p-5 font-mono text-[0.86rem] leading-7 text-zinc-100 selection:bg-cyan-200 selection:text-black"><code>{code}</code></pre>
     </div>
   );
 }
