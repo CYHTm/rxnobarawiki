@@ -1,0 +1,2 @@
+# Сгенерированные Next.js-бандлы могут содержать пробелы внутри многострочных строк.
+docs/_next/static/chunks/*.js whitespace=-blank-at-eol

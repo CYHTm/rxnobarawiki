@@ -1,5 +1,5 @@
-import { GuideContent } from "@/components/GuideContent";
+import { WelcomeScreen } from "@/components/welcome/WelcomeScreen";
 
 export default function Home() {
-  return <GuideContent />;
+  return <WelcomeScreen />;
 }

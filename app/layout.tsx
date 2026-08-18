@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "NOBARA / НАСТРОЙКА - гайд для твоего ПК",
+  title: "NOBARA / ТВОЙ ПК",
   description:
-    "Пошаговая настройка уже установленной Nobara Linux 43 для новичка: Windows 11 рядом, RX 580, LACT, игры, VK Видео Live и два монитора.",
+    "Интерактивный гайд по уже установленной Nobara Linux 43: dual-boot с Windows 11, RX 580, игры, OBS и два монитора.",
   keywords: [
     "Nobara Linux 43",
     "RX 580",
@@ -14,10 +17,10 @@ export const metadata: Metadata = {
     "PipeWire",
     "KDE Plasma 6",
   ],
-  authors: [{ name: "RX//NOBARA" }],
+  authors: [{ name: "NOBARA / ТВОЙ ПК" }],
   openGraph: {
-    title: "NOBARA / НАСТРОЙКА - гайд для твоего ПК",
-    description: "Настройка установленной Nobara 43 для новичка: Windows 11 рядом, RX 580, игры, OBS и VK Видео Live.",
+    title: "NOBARA / ТВОЙ ПК",
+    description: "Отдельные экраны настройки уже установленной Nobara 43 для твоего ПК.",
     type: "website",
     locale: "ru_RU",
   },
@@ -26,13 +29,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#101219",
+  themeColor: "#111117",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru" className="dark">
-      <body>{children}</body>
+      <body><Providers>{children}</Providers></body>
     </html>
   );
 }
