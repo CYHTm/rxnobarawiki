@@ -7,6 +7,7 @@ import {
   HardDrive,
   HeartPulse,
   MonitorUp,
+  NotebookPen,
   PackageOpen,
   RadioTower,
   type LucideIcon,
@@ -113,6 +114,15 @@ export const guideScreens: GuideScreenMeta[] = [
     summary: "Единый маршрут от зависшей Plasma до старого ядра, журналов и загрузочной флешки.",
     icon: HeartPulse,
     tone: "pink",
+  },
+  {
+    id: "notes",
+    number: "10",
+    shortLabel: "Заметоки",
+    title: "Заметоки",
+    summary: "Быстрый белый список диагностических и штатных команд с понятным результатом и кнопкой копирования.",
+    icon: NotebookPen,
+    tone: "amber",
   },
 ];
 

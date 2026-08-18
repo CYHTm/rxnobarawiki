@@ -921,6 +921,74 @@ input[type="range"]::-moz-range-thumb { width: 0.8rem; height: 0.8rem; border: 0
 @keyframes accordion-down { from { height: 0; opacity: 0; } to { height: var(--radix-accordion-content-height); opacity: 1; } }
 @keyframes accordion-up { from { height: var(--radix-accordion-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
 
+/* Заметоки: постоянно видимый белый список команд без аккордеонов. */
+.notes-safety-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.4rem;
+  border: 1px solid rgba(255, 215, 125, 0.15);
+  border-radius: 2.5rem 2.5rem 2.5rem 0.85rem;
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  background: linear-gradient(135deg, #3c301b, #27242b 68%);
+  box-shadow: 0 24px 65px rgba(0,0,0,0.16);
+}
+.notes-safety-icon { display: grid; width: 4.8rem; height: 4.8rem; place-items: center; border-radius: 1.7rem 1.7rem 0.55rem 1.7rem; background: #ffd77d; color: #3f2e00; }
+.notes-safety-icon svg { width: 1.6rem; height: 1.6rem; }
+.notes-safety-kicker { color: #ffd77d; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 820; letter-spacing: 0.1em; text-transform: uppercase; }
+.notes-safety-card h2 { max-width: 48rem; margin: 0.65rem 0 0; color: #fff2d4; font-size: clamp(1.65rem, 3vw, 2.65rem); font-weight: 840; letter-spacing: -0.045em; line-height: 1.08; text-wrap: balance; }
+.notes-safety-card p { max-width: 55rem; margin: 1rem 0 0; color: #d2c7b0; font-size: 0.94rem; line-height: 1.75; }
+
+.notes-command-list { display: grid; gap: 0.85rem; margin: 0; padding: 0; list-style: none; }
+.notes-command-card {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(17rem, 0.82fr) minmax(22rem, 1.18fr);
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+  overflow: hidden;
+  border: 1px solid rgba(147,143,153,0.11);
+  border-radius: 2rem 2rem 2rem 0.7rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  background: #24222b;
+}
+.notes-command-card:nth-child(even) { border-radius: 2rem 0.7rem 2rem 2rem; background: #2b2832; }
+.notes-command-copy { min-width: 0; }
+.notes-command-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.notes-command-number { display: grid; width: 2rem; height: 2rem; place-items: center; border-radius: 0.75rem 0.75rem 0.75rem 0.25rem; background: var(--screen-container); color: var(--screen-on-container); font-family: var(--font-mono); font-size: 0.62rem; font-weight: 820; }
+.notes-command-group { color: var(--screen-accent); font-family: var(--font-mono); font-size: 0.6rem; font-weight: 790; letter-spacing: 0.06em; text-transform: uppercase; }
+.notes-command-safety { margin-left: auto; border-radius: 999px 999px 999px 0.3rem; padding: 0.38rem 0.58rem; background: #18392e; color: #91ebbf; font-size: 0.58rem; font-weight: 820; letter-spacing: 0.035em; text-transform: uppercase; }
+.notes-command-safety[data-action] { background: #453719; color: #ffd77d; }
+.notes-command-card h2 { margin: 1rem 0 0; color: #f1eaf4; font-size: clamp(1.2rem, 2vw, 1.65rem); font-weight: 810; letter-spacing: -0.035em; line-height: 1.18; text-wrap: balance; }
+.notes-command-card p { margin: 0.7rem 0 0; color: #bbb4bf; font-size: 0.88rem; line-height: 1.65; }
+.notes-command-card .notes-command-result { border-top: 1px solid rgba(147,143,153,0.11); padding-top: 0.72rem; color: #9f98a4; font-size: 0.78rem; }
+.notes-command-result strong { color: #ddd5e1; font-weight: 760; }
+.notes-command-card .code-shell { min-width: 0; width: 100%; }
+.notes-command-card .code-shell pre { white-space: pre; }
+
+.notes-signature {
+  position: relative;
+  display: grid;
+  min-height: 18rem;
+  overflow: hidden;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+  border-radius: 3rem 3rem 3rem 0.95rem;
+  padding: clamp(1.8rem, 4vw, 3.5rem);
+  background: linear-gradient(135deg, #f2b8d2 0%, #d6bbff 58%, #b8c8ff 100%);
+  color: #3d1730;
+  box-shadow: 0 26px 75px rgba(0,0,0,0.2);
+}
+.notes-signature::after { position: absolute; right: -7rem; bottom: -10rem; width: 24rem; height: 24rem; border: 1px solid rgba(61,23,48,0.16); border-radius: 42% 58% 66% 34% / 52% 35% 65% 48%; content: ""; transform: rotate(18deg); }
+.notes-signature-heart { position: relative; z-index: 1; display: grid; width: clamp(6.5rem, 12vw, 10rem); height: clamp(6.5rem, 12vw, 10rem); place-items: center; border-radius: 40% 60% 65% 35% / 55% 38% 62% 45%; background: #741b47; color: #ffd9e7; transform: rotate(-5deg); }
+.notes-signature-heart svg { width: 42%; height: 42%; transform: rotate(5deg); }
+.notes-signature > div:last-child { position: relative; z-index: 1; }
+.notes-signature span { display: flex; align-items: center; gap: 0.55rem; font-size: 0.68rem; font-weight: 820; letter-spacing: 0.05em; text-transform: uppercase; }
+.notes-signature span svg { width: 1rem; height: 1rem; }
+.notes-signature strong { display: block; max-width: 47rem; margin-top: 0.75rem; font-size: clamp(1.65rem, 3.6vw, 3.4rem); font-weight: 880; letter-spacing: -0.055em; line-height: 1.02; text-wrap: balance; }
+.notes-signature p { margin: 1rem 0 0; font-size: clamp(0.95rem, 1.4vw, 1.15rem); line-height: 1.5; }
+.notes-signature b { font-weight: 880; }
+
 /* Облегченный режим оставляет интерфейс выразительным, но снимает постоянную нагрузку с GPU. */
 html[data-performance="lite"] { scroll-behavior: auto; }
 html[data-performance="lite"] *,
@@ -957,8 +1025,11 @@ html[data-performance="lite"] .dialog-sheet,
 html[data-performance="lite"] .tooltip-content,
 html[data-performance="lite"] .guide-screen-hero,
 html[data-performance="lite"] .m3-step-content,
+html[data-performance="lite"] .notes-safety-card,
+html[data-performance="lite"] .notes-signature,
 html[data-performance="lite"] .mobile-dock { box-shadow: none; }
-html[data-performance="lite"] .m3-step {
+html[data-performance="lite"] .m3-step,
+html[data-performance="lite"] .notes-command-card {
   content-visibility: auto;
   contain-intrinsic-size: auto 34rem;
 }
@@ -1011,6 +1082,7 @@ html[data-performance="lite"] .m3-step {
   .welcome-visual { width: min(100%, 31rem); margin: 0 auto; justify-self: center; }
   .welcome-footer { justify-content: center; flex-wrap: wrap; }
   .route-heading { grid-template-columns: 1fr; }
+  .notes-command-card { grid-template-columns: 1fr; }
   .overview-state-orb { width: 8rem; height: 8rem; }
   .overview-state-orb span { font-size: 3.4rem; }
 }
@@ -1080,6 +1152,14 @@ html[data-performance="lite"] .m3-step {
   .m3-setting-row { align-items: flex-start; flex-direction: column; gap: 0.3rem; }
   .m3-setting-row > strong { text-align: left; }
   .m3-warning { grid-template-columns: 1fr; }
+  .notes-safety-card,
+  .notes-signature { grid-template-columns: 1fr; }
+  .notes-safety-icon { width: 3.8rem; height: 3.8rem; }
+  .notes-command-card,
+  .notes-command-card:nth-child(even) { border-radius: 1.65rem 1.65rem 1.65rem 0.55rem; padding: 1.1rem; }
+  .notes-command-safety { width: calc(100% - 2.5rem); margin-left: 2.5rem; text-align: center; }
+  .notes-signature { min-height: 25rem; }
+  .notes-signature-heart { width: 6rem; height: 6rem; }
 
   .overview-state-card { min-height: 25rem; grid-template-columns: 1fr; padding: 1.5rem; }
   .overview-state-orb { position: absolute; right: -2rem; bottom: -2.5rem; opacity: 0.42; }

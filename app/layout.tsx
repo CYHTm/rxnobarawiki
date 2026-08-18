@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   authors: [{ name: "NOBARA / ТВОЙ ПК" }],
   openGraph: {
     title: "NOBARA / ТВОЙ ПК",
-    description: "Десять экранов настройки и восстановления уже установленной Nobara 43 для твоего ПК.",
+    description: "Одиннадцать экранов настройки, безопасных команд и восстановления уже установленной Nobara 43 для твоего ПК.",
     type: "website",
     locale: "ru_RU",
   },

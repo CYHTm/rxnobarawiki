@@ -15,6 +15,7 @@ import { GamesScreen } from "@/components/guide/screens/GamesScreen";
 import { LactScreen } from "@/components/guide/screens/LactScreen";
 import { ObsScreen } from "@/components/guide/screens/ObsScreen";
 import { OverviewScreen } from "@/components/guide/screens/OverviewScreen";
+import { NotesScreen } from "@/components/guide/screens/NotesScreen";
 import { RescueScreen } from "@/components/guide/screens/RescueScreen";
 import { SystemScreen } from "@/components/guide/screens/SystemScreen";
 
@@ -29,6 +30,7 @@ const screenComponents = {
   dualboot: DualBootScreen,
   devices: DevicesScreen,
   rescue: RescueScreen,
+  notes: NotesScreen,
 };
 
 const variants = {
