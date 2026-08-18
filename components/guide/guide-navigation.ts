@@ -13,7 +13,9 @@ export function openGuideScreen(screen: GuideScreenId, history: "push" | "replac
   }
 
   if (typeof window !== "undefined") {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const simpleMotion = document.documentElement.dataset.performance === "lite"
+      || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: simpleMotion ? "auto" : "smooth" });
     document.title = `${getGuideScreen(screen).title} - NOBARA / ТВОЙ ПК`;
   }
 }

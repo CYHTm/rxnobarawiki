@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect } from "react";
+import { useLightweightMode } from "@/components/TypographySettings";
 import { DesktopRail, GuideTopBar, MobileDock, ScreenPager } from "@/components/guide/GuideNavigation";
 import { getGuideScreen } from "@/components/guide/guide-map";
 import { openGuideScreen } from "@/components/guide/guide-navigation";
@@ -36,6 +37,8 @@ export function GuideApp() {
   const active = useGuideStore((state) => state.activeScreen);
   const direction = useGuideStore((state) => state.direction);
   const reduceMotion = useReducedMotion();
+  const lightweightMode = useLightweightMode();
+  const simpleMotion = Boolean(reduceMotion || lightweightMode);
   const ActiveScreen = screenComponents[active];
   const meta = getGuideScreen(active);
 
@@ -63,21 +66,28 @@ export function GuideApp() {
       <div className="guide-workspace">
         <GuideTopBar />
         <main className="guide-stage" tabIndex={-1}>
-          <AnimatePresence mode="wait" initial={false} custom={direction}>
-            <motion.div
-              key={active}
-              custom={direction}
-              variants={reduceMotion ? undefined : variants}
-              initial={reduceMotion ? { opacity: 0 } : "enter"}
-              animate={reduceMotion ? { opacity: 1 } : "center"}
-              exit={reduceMotion ? { opacity: 0 } : "exit"}
-              transition={reduceMotion ? { duration: 0.12 } : { type: "spring", stiffness: 185, damping: 25, mass: 0.78 }}
-              className="guide-scene"
-            >
+          {simpleMotion ? (
+            <div key={active} className="guide-scene">
               <ActiveScreen />
               <ScreenPager />
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          ) : (
+            <AnimatePresence mode="wait" initial={false} custom={direction}>
+              <motion.div
+                key={active}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ type: "spring", stiffness: 185, damping: 25, mass: 0.78 }}
+                className="guide-scene"
+              >
+                <ActiveScreen />
+                <ScreenPager />
+              </motion.div>
+            </AnimatePresence>
+          )}
         </main>
       </div>
       <MobileDock />

@@ -2,10 +2,10 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Tooltip from "@radix-ui/react-tooltip";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Grid2X2, House, X } from "lucide-react";
 import Link from "next/link";
-import { TypographySettings } from "@/components/TypographySettings";
+import { TypographySettings, useLightweightMode } from "@/components/TypographySettings";
 import { SourcesDialog } from "@/components/guide/SourcesDialog";
 import { getGuideScreen, guideScreens } from "@/components/guide/guide-map";
 import { getNeighborScreen, openGuideScreen } from "@/components/guide/guide-navigation";
@@ -13,6 +13,9 @@ import { useGuideStore } from "@/components/guide/guide-store";
 
 export function DesktopRail() {
   const active = useGuideStore((state) => state.activeScreen);
+  const reduceMotion = useReducedMotion();
+  const lightweightMode = useLightweightMode();
+  const simpleMotion = Boolean(reduceMotion || lightweightMode);
 
   return (
     <Tooltip.Provider delayDuration={350}>
@@ -36,7 +39,11 @@ export function DesktopRail() {
                     aria-current={selected ? "page" : undefined}
                   >
                     <span className="rail-icon" data-tone={screen.tone}>
-                      {selected && <motion.span layoutId="rail-active" className="rail-active-shape" transition={{ type: "spring", stiffness: 360, damping: 30 }} />}
+                      {selected && (simpleMotion ? (
+                        <span className="rail-active-shape" />
+                      ) : (
+                        <motion.span layoutId="rail-active" className="rail-active-shape" transition={{ type: "spring", stiffness: 360, damping: 30 }} />
+                      ))}
                       <Icon aria-hidden="true" />
                     </span>
                     <span>{screen.shortLabel}</span>
@@ -63,6 +70,9 @@ export function DesktopRail() {
 
 export function GuideTopBar() {
   const active = useGuideStore((state) => state.activeScreen);
+  const reduceMotion = useReducedMotion();
+  const lightweightMode = useLightweightMode();
+  const simpleMotion = Boolean(reduceMotion || lightweightMode);
   const meta = getGuideScreen(active);
   const Icon = meta.icon;
 
@@ -71,7 +81,13 @@ export function GuideTopBar() {
       <div className="topbar-current" data-tone={meta.tone}>
         <span><Icon aria-hidden="true" /></span>
         <AnimatePresence mode="wait" initial={false}>
-          <motion.div key={meta.id} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }}>
+          <motion.div
+            key={meta.id}
+            initial={simpleMotion ? false : { opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={simpleMotion ? undefined : { opacity: 0, y: -5 }}
+            transition={simpleMotion ? { duration: 0 } : undefined}
+          >
             <small>{meta.id === "overview" ? "Стартовый экран" : `Раздел ${meta.number}`}</small>
             <strong>{meta.title}</strong>
           </motion.div>
@@ -164,6 +180,10 @@ export function MobileDock() {
                   </button>
                 );
               })}
+            </div>
+            <div className="mobile-navigation-actions">
+              <SourcesDialog />
+              <TypographySettings />
             </div>
             <Dialog.Close asChild>
               <button type="button" className="dialog-close" aria-label="Закрыть меню"><X aria-hidden="true" /></button>

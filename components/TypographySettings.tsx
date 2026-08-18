@@ -1,18 +1,20 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
-import { Settings2, Type, X } from "lucide-react";
+import { Gauge, Settings2, Type, X, Zap } from "lucide-react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type TextScale = "small" | "normal" | "large";
 
-interface TypographyContextValue {
+interface PreferencesContextValue {
   scale: TextScale;
   setScale: (scale: TextScale) => void;
+  lightweightMode: boolean;
+  setLightweightMode: (enabled: boolean) => void;
 }
 
-const TypographyContext = createContext<TypographyContextValue | null>(null);
+const PreferencesContext = createContext<PreferencesContextValue | null>(null);
 const storageKey = "rx-nobara-text-scale";
 
 const options: { value: TextScale; label: string; previewClass: string }[] = [
@@ -21,8 +23,9 @@ const options: { value: TextScale; label: string; previewClass: string }[] = [
   { value: "large", label: "Крупнее", previewClass: "text-2xl" },
 ];
 
-export function TypographyProvider({ children }: { children: React.ReactNode }) {
+export function PreferencesProvider({ children }: { children: React.ReactNode }) {
   const [scale, setScale] = useState<TextScale>("normal");
+  const [lightweightMode, setLightweightMode] = useState(false);
 
   useEffect(() => {
     let saved: string | null = null;
@@ -46,17 +49,29 @@ export function TypographyProvider({ children }: { children: React.ReactNode }) 
     }
   }, [scale]);
 
-  return <TypographyContext.Provider value={{ scale, setScale }}>{children}</TypographyContext.Provider>;
+  useEffect(() => {
+    document.documentElement.dataset.performance = lightweightMode ? "lite" : "full";
+  }, [lightweightMode]);
+
+  return (
+    <PreferencesContext.Provider value={{ scale, setScale, lightweightMode, setLightweightMode }}>
+      {children}
+    </PreferencesContext.Provider>
+  );
 }
 
-function useTypography() {
-  const value = useContext(TypographyContext);
-  if (!value) throw new Error("Настройки типографики должны находиться внутри TypographyProvider");
+function usePreferences() {
+  const value = useContext(PreferencesContext);
+  if (!value) throw new Error("Настройки сайта должны находиться внутри PreferencesProvider");
   return value;
 }
 
+export function useLightweightMode() {
+  return usePreferences().lightweightMode;
+}
+
 export function TypographySettings({ compact = false }: { compact?: boolean }) {
-  const { scale, setScale } = useTypography();
+  const { scale, setScale, lightweightMode, setLightweightMode } = usePreferences();
 
   return (
     <Dialog.Root>
@@ -64,7 +79,7 @@ export function TypographySettings({ compact = false }: { compact?: boolean }) {
         <button
           type="button"
           className={cn("typography-trigger", compact && "typography-trigger-compact")}
-          aria-label="Настроить размер текста"
+          aria-label="Открыть настройки сайта"
         >
           <Settings2 aria-hidden="true" />
           {!compact && <span>Настройки</span>}
@@ -75,27 +90,59 @@ export function TypographySettings({ compact = false }: { compact?: boolean }) {
         <Dialog.Content className="dialog-sheet typography-sheet">
           <div className="dialog-handle" aria-hidden="true" />
           <div className="dialog-heading">
-            <div className="dialog-heading-icon"><Type aria-hidden="true" /></div>
+            <div className="dialog-heading-icon"><Gauge aria-hidden="true" /></div>
             <div>
-              <Dialog.Title className="dialog-title">Размер текста</Dialog.Title>
-              <Dialog.Description className="dialog-description">Три режима для чтения с монитора. Выбор сохранится только в этом браузере.</Dialog.Description>
+              <Dialog.Title className="dialog-title">Настройки сайта</Dialog.Title>
+              <Dialog.Description className="dialog-description">Подстрой чтение и нагрузку под свой экран и железо.</Dialog.Description>
             </div>
           </div>
-          <div className="typography-options" role="group" aria-label="Размер текста">
-            {options.map((option) => (
+
+          <section className="settings-section" aria-labelledby="text-size-title">
+            <div className="settings-section-heading">
+              <Type aria-hidden="true" />
+              <div>
+                <h2 id="text-size-title">Размер текста</h2>
+                <p>Выбор сохранится только в этом браузере.</p>
+              </div>
+            </div>
+            <div className="typography-options" role="group" aria-label="Размер текста">
+              {options.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setScale(option.value)}
+                  data-active={scale === option.value || undefined}
+                  aria-pressed={scale === option.value}
+                >
+                  <span className={option.previewClass}>Aa</span>
+                  <strong>{option.label}</strong>
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <section className="settings-section performance-section" aria-labelledby="performance-title">
+            <div className="performance-option" data-active={lightweightMode || undefined}>
+              <div className="performance-icon" aria-hidden="true"><Zap /></div>
+              <div className="performance-copy">
+                <h2 id="performance-title">Облегченный режим</h2>
+                <p>Для слабых ПК и ноутов. Убирает размытия, тяжелые тени, фоновые эффекты и почти все движение.</p>
+                <span>{lightweightMode ? "Включен. Видеочип наконец перестал изображать фен." : "Сейчас работает полный визуальный режим."}</span>
+              </div>
               <button
-                key={option.value}
                 type="button"
-                onClick={() => setScale(option.value)}
-                data-active={scale === option.value || undefined}
-                aria-pressed={scale === option.value}
+                role="switch"
+                aria-checked={lightweightMode}
+                aria-label="Облегченный режим"
+                className="performance-switch"
+                onClick={() => setLightweightMode(!lightweightMode)}
               >
-                <span className={option.previewClass}>Aa</span>
-                <strong>{option.label}</strong>
+                <span aria-hidden="true" />
               </button>
-            ))}
-          </div>
-          <p className="typography-note">Другие настройки и состояние гайда в LocalStorage не записываются.</p>
+            </div>
+          </section>
+
+          <p className="typography-note">Облегченный режим действует до обновления страницы. В LocalStorage по-прежнему записывается только размер текста.</p>
           <Dialog.Close asChild>
             <button type="button" className="dialog-close" aria-label="Закрыть настройки"><X aria-hidden="true" /></button>
           </Dialog.Close>

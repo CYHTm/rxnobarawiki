@@ -1,7 +1,8 @@
 "use client";
 
 import { ArrowUpRight, Cpu, HardDrive, MemoryStick, MonitorUp, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useLightweightMode } from "@/components/TypographySettings";
 import { GuideScreen, Term } from "@/components/guide/GuidePrimitives";
 import { guideScreens } from "@/components/guide/guide-map";
 import { openGuideScreen } from "@/components/guide/guide-navigation";
@@ -15,6 +16,10 @@ const specs = [
 ];
 
 export function OverviewScreen() {
+  const reduceMotion = useReducedMotion();
+  const lightweightMode = useLightweightMode();
+  const simpleMotion = Boolean(reduceMotion || lightweightMode);
+
   return (
     <GuideScreen
       id="overview"
@@ -23,9 +28,9 @@ export function OverviewScreen() {
       description="Система уже установлена рядом с Windows. Здесь не будет второго круга установки: сначала разберемся в словах, затем спокойно настроим то, что уже работает."
     >
       <motion.div
-        initial={{ opacity: 0, y: 18 }}
+        initial={simpleMotion ? false : { opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.08, type: "spring", stiffness: 180, damping: 24 }}
+        transition={simpleMotion ? { duration: 0 } : { delay: 0.08, type: "spring", stiffness: 180, damping: 24 }}
         className="overview-state-card"
       >
         <div>
@@ -42,9 +47,9 @@ export function OverviewScreen() {
           return (
             <motion.div
               key={spec.label}
-              initial={{ opacity: 0, y: 16, scale: 0.97 }}
+              initial={simpleMotion ? false : { opacity: 0, y: 16, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.12 + index * 0.04, type: "spring", stiffness: 210, damping: 24 }}
+              transition={simpleMotion ? { duration: 0 } : { delay: 0.12 + index * 0.04, type: "spring", stiffness: 210, damping: 24 }}
               className={`spec-tile ${spec.className}`}
             >
               <Icon aria-hidden="true" />
@@ -71,9 +76,9 @@ export function OverviewScreen() {
                 key={screen.id}
                 type="button"
                 onClick={() => openGuideScreen(screen.id)}
-                whileHover={{ y: -4, scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 360, damping: 24 }}
+                whileHover={simpleMotion ? undefined : { y: -4, scale: 1.01 }}
+                whileTap={simpleMotion ? undefined : { scale: 0.98 }}
+                transition={simpleMotion ? { duration: 0 } : { type: "spring", stiffness: 360, damping: 24 }}
                 className="route-card"
                 data-tone={screen.tone}
               >

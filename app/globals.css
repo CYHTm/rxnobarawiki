@@ -76,12 +76,17 @@ button { color: inherit; }
   outline-offset: 3px;
 }
 
-::-webkit-scrollbar { width: 11px; height: 11px; }
-::-webkit-scrollbar-track { background: var(--md-background); }
-::-webkit-scrollbar-thumb {
-  border: 3px solid var(--md-background);
-  border-radius: 999px;
-  background: var(--md-outline-variant);
+html,
+body,
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Приветственный экран */
@@ -444,7 +449,15 @@ button { color: inherit; }
 .dialog-close:hover { background: #46424d; }
 .dialog-close svg { width: 1.05rem; }
 
-.typography-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 1.75rem; }
+.settings-section { margin-top: 1.65rem; }
+.settings-section-heading { display: flex; align-items: center; gap: 0.75rem; }
+.settings-section-heading > svg { width: 1.1rem; color: var(--md-primary); }
+.settings-section-heading h2,
+.performance-copy h2 { margin: 0; color: #eee7f1; font-size: 0.92rem; font-weight: 800; }
+.settings-section-heading p,
+.performance-copy p { margin: 0.2rem 0 0; color: #9f98a3; font-size: 0.72rem; line-height: 1.5; }
+
+.typography-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 0.85rem; }
 .typography-options button {
   display: flex;
   min-height: 8rem;
@@ -463,6 +476,48 @@ button { color: inherit; }
 .typography-options button[data-active] { border-color: var(--md-primary); background: #4f378b; color: #f0e6ff; }
 .typography-options button span { font-weight: 820; line-height: 1; }
 .typography-options button strong { font-size: 0.72rem; }
+
+.performance-option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 1.7rem 1.7rem 1.7rem 0.58rem;
+  padding: 1rem;
+  background: #34313c;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+.performance-option[data-active] { border-color: rgba(136, 239, 192, 0.48); background: #203b31; }
+.performance-icon { display: grid; width: 3.2rem; height: 3.2rem; place-items: center; border-radius: 1.15rem 1.15rem 1.15rem 0.4rem; background: #493865; color: #d8c4ff; }
+.performance-option[data-active] .performance-icon { background: #8cebbd; color: #073b29; }
+.performance-icon svg { width: 1.25rem; }
+.performance-copy { min-width: 0; }
+.performance-copy span { display: block; margin-top: 0.45rem; color: #c8c1cc; font-size: 0.66rem; font-weight: 690; line-height: 1.45; }
+.performance-switch {
+  position: relative;
+  width: 3.3rem;
+  height: 2rem;
+  border: 2px solid #817a85;
+  border-radius: 999px;
+  padding: 0;
+  background: #292731;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+.performance-switch > span {
+  position: absolute;
+  top: 50%;
+  left: 0.3rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: #aaa3ae;
+  transform: translateY(-50%);
+  transition: width 180ms ease, transform 180ms cubic-bezier(.2,.8,.2,1), background 180ms ease;
+}
+.performance-switch[aria-checked="true"] { border-color: #8cebbd; background: #8cebbd; }
+.performance-switch[aria-checked="true"] > span { width: 1.35rem; background: #073b29; transform: translate(1.25rem, -50%); }
 .typography-note { margin: 1rem 0 0; color: #918b96; font-size: 0.72rem; line-height: 1.5; }
 
 .sources-list { display: grid; gap: 0.45rem; margin-top: 1.6rem; }
@@ -854,6 +909,10 @@ input[type="range"]::-moz-range-thumb { width: 0.8rem; height: 0.8rem; border: 0
 .mobile-screen-grid button svg { width: 1.05rem; }
 .mobile-screen-grid button small { align-self: end; color: #8d8792; font-family: var(--font-mono); font-size: 0.55rem; }
 .mobile-screen-grid button strong { align-self: start; font-size: 0.75rem; }
+.mobile-navigation-actions { display: flex; gap: 0.55rem; margin-top: 0.8rem; }
+.mobile-navigation-actions > * { flex: 1; }
+.mobile-navigation-actions .app-action-button,
+.mobile-navigation-actions .typography-trigger { width: 100%; }
 
 @keyframes welcome-shimmer { to { background-position: -260% center; } }
 @keyframes overlay-in { from { opacity: 0; } }
@@ -861,6 +920,48 @@ input[type="range"]::-moz-range-thumb { width: 0.8rem; height: 0.8rem; border: 0
 @keyframes tooltip-in { from { opacity: 0; transform: translateX(-3px); } }
 @keyframes accordion-down { from { height: 0; opacity: 0; } to { height: var(--radix-accordion-content-height); opacity: 1; } }
 @keyframes accordion-up { from { height: var(--radix-accordion-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
+
+/* Облегченный режим оставляет интерфейс выразительным, но снимает постоянную нагрузку с GPU. */
+html[data-performance="lite"] { scroll-behavior: auto; }
+html[data-performance="lite"] *,
+html[data-performance="lite"] *::before,
+html[data-performance="lite"] *::after {
+  scroll-behavior: auto !important;
+  animation: none !important;
+  transition: none !important;
+}
+html[data-performance="lite"] .welcome-screen { background: #111117; }
+html[data-performance="lite"] .welcome-noise,
+html[data-performance="lite"] .welcome-color-field,
+html[data-performance="lite"] .welcome-visual-rings,
+html[data-performance="lite"] .guide-ambient { display: none; }
+html[data-performance="lite"] .welcome-title-shimmer { filter: none; background-size: 100% auto; }
+html[data-performance="lite"] .welcome-header-note,
+html[data-performance="lite"] .typography-trigger,
+html[data-performance="lite"] .app-action-button,
+html[data-performance="lite"] .welcome-float,
+html[data-performance="lite"] .dialog-overlay,
+html[data-performance="lite"] .desktop-rail,
+html[data-performance="lite"] .guide-topbar,
+html[data-performance="lite"] .mobile-dock {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+html[data-performance="lite"] .dialog-overlay { background: rgba(5, 5, 9, 0.86); }
+html[data-performance="lite"] .welcome-brand > span,
+html[data-performance="lite"] .rail-brand-mark,
+html[data-performance="lite"] .welcome-enter,
+html[data-performance="lite"] .welcome-core,
+html[data-performance="lite"] .welcome-float,
+html[data-performance="lite"] .dialog-sheet,
+html[data-performance="lite"] .tooltip-content,
+html[data-performance="lite"] .guide-screen-hero,
+html[data-performance="lite"] .m3-step-content,
+html[data-performance="lite"] .mobile-dock { box-shadow: none; }
+html[data-performance="lite"] .m3-step {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 34rem;
+}
 
 @media (max-width: 1180px) {
   .welcome-layout { grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.78fr); gap: 2rem; }

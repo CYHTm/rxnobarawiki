@@ -2,7 +2,8 @@
 
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown, CornerDownRight, Info, ShieldAlert } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useLightweightMode } from "@/components/TypographySettings";
 import { cn } from "@/lib/utils";
 
 interface GuideScreenProps {
@@ -14,12 +15,16 @@ interface GuideScreenProps {
 }
 
 export function GuideScreen({ id, number, title, description, children }: GuideScreenProps) {
+  const reduceMotion = useReducedMotion();
+  const lightweightMode = useLightweightMode();
+  const simpleMotion = Boolean(reduceMotion || lightweightMode);
+
   return (
     <section id={id} className="guide-screen" aria-labelledby={`${id}-title`}>
       <motion.header
-        initial={{ opacity: 0, y: 24, scale: 0.985 }}
+        initial={simpleMotion ? false : { opacity: 0, y: 24, scale: 0.985 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.8 }}
+        transition={simpleMotion ? { duration: 0 } : { type: "spring", stiffness: 220, damping: 24, mass: 0.8 }}
         className="guide-screen-hero"
       >
         <div className="guide-screen-orbit" aria-hidden="true">
@@ -44,12 +49,16 @@ interface StepBlockProps {
 }
 
 export function StepBlock({ id, title, children, status }: StepBlockProps) {
+  const reduceMotion = useReducedMotion();
+  const lightweightMode = useLightweightMode();
+  const simpleMotion = Boolean(reduceMotion || lightweightMode);
+
   return (
     <motion.article
       id={`action-${id}`}
-      initial={{ opacity: 0, y: 20 }}
+      initial={simpleMotion ? false : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 190, damping: 26, delay: 0.06 }}
+      transition={simpleMotion ? { duration: 0 } : { type: "spring", stiffness: 190, damping: 26, delay: 0.06 }}
       className="m3-step scroll-mt-28"
     >
       <div className="m3-step-accent" aria-hidden="true">
