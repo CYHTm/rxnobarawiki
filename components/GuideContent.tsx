@@ -57,7 +57,7 @@ function Intro() {
     <section id="top" className="pb-14 sm:pb-20">
       <p className="font-mono text-xs text-zinc-600">NOBARA 43 / KDE PLASMA 6 / WAYLAND</p>
       <h1 className="mt-5 max-w-2xl text-4xl font-semibold leading-[1.05] tracking-[-0.045em] text-white sm:text-6xl">
-        Настройка моего ПК без лишней херни
+        Настройка твоего ПК без лишней херни
       </h1>
       <p className="mt-6 max-w-xl text-[15px] leading-7 text-zinc-400">
         Ryzen 5 2600, RX 580 8 ГБ, 16 ГБ памяти, Gigabyte B450M S2H, NVMe 512 ГБ, Acer 75 Гц и ViewSonic 60 Гц. Тут только что нажать, что вставить и как откатить, если все пошло по пизде.
