@@ -3,7 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Grid2X2, House, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Gavel, Grid2X2, House, X } from "lucide-react";
 import Link from "next/link";
 import { TypographySettings, useLightweightMode } from "@/components/TypographySettings";
 import { SourcesDialog } from "@/components/guide/SourcesDialog";
@@ -94,8 +94,10 @@ export function GuideTopBar() {
         </AnimatePresence>
       </div>
       <div className="topbar-actions">
-        <SourcesDialog />
-        <TypographySettings />
+        <Link href="/tribunal" className="tribunal-entry-button">
+          <Gavel aria-hidden="true" />
+          <span>Кто виноват?</span>
+        </Link>
       </div>
     </header>
   );
