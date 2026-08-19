@@ -216,7 +216,7 @@ export function NotesScreen() {
   return (
     <GuideScreen
       id="notes"
-      number="10"
+      number="11"
       title="Заметки"
       description="Команды, которые реально нужны под рукой: все сразу видны, каждая копируется одной кнопкой, никакого аккордеона и терминального сатанизма."
     >

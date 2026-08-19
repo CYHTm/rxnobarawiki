@@ -18,6 +18,7 @@ import { OverviewScreen } from "@/components/guide/screens/OverviewScreen";
 import { NotesScreen } from "@/components/guide/screens/NotesScreen";
 import { RescueScreen } from "@/components/guide/screens/RescueScreen";
 import { SystemScreen } from "@/components/guide/screens/SystemScreen";
+import { TuningScreen } from "@/components/guide/screens/TuningScreen";
 
 const screenComponents = {
   overview: OverviewScreen,
@@ -30,6 +31,7 @@ const screenComponents = {
   dualboot: DualBootScreen,
   devices: DevicesScreen,
   rescue: RescueScreen,
+  tuning: TuningScreen,
   notes: NotesScreen,
 };
 

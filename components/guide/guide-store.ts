@@ -13,6 +13,7 @@ export type GuideScreenId =
   | "dualboot"
   | "devices"
   | "rescue"
+  | "tuning"
   | "notes";
 
 export const guideScreenIds: GuideScreenId[] = [
@@ -26,6 +27,7 @@ export const guideScreenIds: GuideScreenId[] = [
   "dualboot",
   "devices",
   "rescue",
+  "tuning",
   "notes",
 ];
 

@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   title: "NOBARA / ТВОЙ ПК",
   description:
-    "Интерактивный гайд по уже установленной Nobara Linux 43 для твоего ПК: штатная оптимизация, Windows 11, Wayland, игры, стрим, устройства и восстановление системы.",
+    "Интерактивный гайд по уже установленной Nobara Linux 43 для твоего ПК: штатная оптимизация, измеримые низкоуровневые эксперименты, Windows 11, игры, стрим и восстановление системы.",
   keywords: [
     "Nobara Linux 43",
     "RX 580",
@@ -19,11 +19,15 @@ export const metadata: Metadata = {
     "KDE Plasma 6",
     "falcond",
     "zram",
+    "MangoHud",
+    "Btrfs",
+    "Mesa RADV",
+    "grubby",
   ],
   authors: [{ name: "NOBARA / ТВОЙ ПК" }],
   openGraph: {
     title: "NOBARA / ТВОЙ ПК",
-    description: "Одиннадцать экранов настройки, штатной оптимизации, безопасных команд и восстановления уже установленной Nobara 43 для твоего ПК.",
+    description: "Двенадцать экранов настройки, штатной оптимизации, измеримых экспериментов и восстановления уже установленной Nobara 43 для твоего ПК.",
     type: "website",
     locale: "ru_RU",
   },

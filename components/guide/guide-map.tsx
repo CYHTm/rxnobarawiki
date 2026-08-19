@@ -1,6 +1,7 @@
 import {
   AudioLines,
   BookOpenText,
+  FlaskConical,
   Gamepad2,
   Gauge,
   GitBranch,
@@ -116,8 +117,17 @@ export const guideScreens: GuideScreenMeta[] = [
     tone: "pink",
   },
   {
-    id: "notes",
+    id: "tuning",
     number: "10",
+    shortLabel: "Лаборатория",
+    title: "Тонкая настройка",
+    summary: "Аргументы ядра, измеримый A/B-тест, Btrfs, NVMe и Vulkan без веры в бесплатный FPS.",
+    icon: FlaskConical,
+    tone: "orange",
+  },
+  {
+    id: "notes",
+    number: "11",
     shortLabel: "Заметки",
     title: "Заметки",
     summary: "Быстрый белый список диагностических и штатных команд с понятным результатом и кнопкой копирования.",
