@@ -73,7 +73,7 @@ export function WelcomeScreen() {
               <span className="welcome-title-shimmer">NOBARA</span>
             </motion.h1>
             <motion.p initial={simpleMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={simpleMotion ? { duration: 0 } : { delay: 0.22, duration: 0.55 }} className="welcome-lead">
-              Не еще одна простыня команд, а отдельные экраны для уже установленной системы: загрузка, программы, RX 580, игры, эфир и Windows рядом.
+              Не еще одна простыня команд, а отдельные экраны для уже установленной системы: загрузка, программы, клиент подписки, RX 580, игры, эфир и Windows рядом.
             </motion.p>
 
             <motion.div initial={simpleMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={simpleMotion ? { duration: 0 } : { delay: 0.3, duration: 0.5 }} className="welcome-actions">

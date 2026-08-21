@@ -6,6 +6,7 @@ export type GuideScreenId =
   | "overview"
   | "before"
   | "start"
+  | "vpn"
   | "display"
   | "lact"
   | "games"
@@ -20,6 +21,7 @@ export const guideScreenIds: GuideScreenId[] = [
   "overview",
   "before",
   "start",
+  "vpn",
   "display",
   "lact",
   "games",

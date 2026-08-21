@@ -6,7 +6,7 @@ import { Code, GuideScreen, Setting, Settings, StepBlock, SupportPanel } from "@
 
 export function LactScreen() {
   return (
-    <GuideScreen id="lact" number="04" title="RX 580 и LACT" description="LACT уже установлен. Сначала проверяем службу, карту и датчики, только потом разрешаем управление напряжением.">
+    <GuideScreen id="lact" number="05" title="RX 580 и LACT" description="LACT уже установлен. Сначала проверяем службу, карту и датчики, только потом разрешаем управление напряжением.">
       <StepBlock id="lact-install" title="Проверь установленный LACT и службу lactd">
         LACT уже стоит, поэтому переустанавливать его поверх рабочей системы не надо. Сначала открой Konsole и проверь пакет, автозапуск фоновой службы и ее текущее состояние.
         <CodeSnippet code={"rpm -q lact\nsystemctl is-enabled lactd\nsystemctl is-active lactd"} label="Проверить пакет, автозапуск и текущее состояние" className="mt-6" />

@@ -5,7 +5,7 @@ import { Code, GuideScreen, Setting, Settings, StepBlock, SupportPanel } from "@
 
 export function ObsScreen() {
   return (
-    <GuideScreen id="obs" number="06" title="OBS и VK Видео Live" description="Собираем нативный OBS, отдельный звук PipeWire и безопасный тестовый эфир. Сразу стримить в боевой аккаунт без прогона - храбро, но тупо.">
+    <GuideScreen id="obs" number="07" title="OBS и VK Видео Live" description="Собираем нативный OBS, отдельный звук PipeWire и безопасный тестовый эфир. Сразу стримить в боевой аккаунт без прогона - храбро, но тупо.">
       <StepBlock id="obs-video" title="Проверь нативный OBS и настрой VAAPI H.264">
         Открой OBS из меню. Если его еще нет, поставь <Code>obs-studio</Code> через Nobara Welcome - Recommended Additions или DNF App Center - Packages. Версию из Flathub здесь не используй. Нативная сборка Nobara лучше дружит с системным VAAPI и игровыми плагинами захвата.
         <p className="mt-4">Открой Настройки - Вывод, выбери расширенный режим и вкладку Трансляция. Для первого стабильного теста на RX 580 используй профиль 720p60. Это не вечный потолок качества, а нормальная отправная точка, которая оставляет игре запас видеокарты.</p>
