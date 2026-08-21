@@ -1,0 +1,3 @@
+:HL["/rxnobarawiki/_next/static/chunks/22j8yz5czegzg.css","style"]
+:HC["/",""]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"NDwXexXeei_bzkjYECRUj"}
