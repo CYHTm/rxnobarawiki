@@ -1,11 +1,11 @@
 "use client";
 
 import { CodeSnippet } from "@/components/CodeSnippet";
-import { Code, GuideScreen, StepBlock, SupportPanel, Warning } from "@/components/guide/GuidePrimitives";
+import { Code, GuideScreen, Setting, Settings, StepBlock, SupportPanel, Warning } from "@/components/guide/GuidePrimitives";
 
 export function DualBootScreen() {
   return (
-    <GuideScreen id="dualboot" number="07" title="Windows 11 рядом с Nobara" description="Две системы должны делить часы, загрузку и иногда диски. Настроим это без магии.">
+    <GuideScreen id="dualboot" number="08" title="Windows 11 рядом с Nobara" description="Две системы должны делить часы, загрузку и иногда диски. Настроим это без магии.">
       <Warning>
         У тебя обе системы уже загружаются с одного NVMe и общего EFI. Не меняй разметку ради этого раздела. Здесь мы только согласуем часы и меню запуска, а состояние EFI контролируем командами из первого раздела.
       </Warning>
@@ -50,6 +50,23 @@ export function DualBootScreen() {
         </SupportPanel>
         <SupportPanel title="Снова скрывать меню после успешного запуска">
           <CodeSnippet code="sudo grub2-editenv - set menu_auto_hide=1" label="Вернуть автоматическое скрытие GRUB" />
+        </SupportPanel>
+      </StepBlock>
+
+      <StepBlock id="windows-update-boot" title="После обновления Windows верни Nobara первой">
+        Windows Update умеет поставить Windows Boot Manager первым. Nobara при этом не удаляется: просто плата стартует чужую запись. На Gigabyte B450M S2H сразу после логотипа жми <Code>F12</Code>, выбери загрузчик Nobara и зайди в систему.
+        <p className="mt-5">Посмотри порядок, ничего не меняя:</p>
+        <CodeSnippet code="sudo efibootmgr" label="Показать порядок загрузочных записей платы" className="mt-4" />
+        <p className="mt-4">В <Code>BootOrder</Code> первым часто окажется Windows. Подставь свои четырехзначные номера: сначала Nobara, затем Windows.</p>
+        <CodeSnippet code="sudo efibootmgr -o 0001,0000" label="Пример: Nobara первой. Номера возьми из своего вывода" className="mt-4" />
+        <p className="mt-4">Перезагрузись без F12. Должно открыться меню GRUB. Разделы и каталог <Code>EFI/Microsoft</Code> не трогай.</p>
+        <Settings className="mt-5">
+          <Setting label="F12 после логотипа Gigabyte" value="Разовое Boot Menu" />
+          <Setting label="Del" value="BIOS, если порядок снова сбрасывается" />
+          <Setting label="CSM и BIOS Fast Boot" value="Не включать на уже работающем UEFI dual-boot" />
+        </Settings>
+        <SupportPanel title="Как вернуть Windows первой">
+          Повтори <Code>efibootmgr</Code> и поставь номер Windows Boot Manager первым либо смени Boot Option #1 в BIOS. Сами системы от смены порядка не удаляются. Nobara после этого запускается через F12.
         </SupportPanel>
       </StepBlock>
 

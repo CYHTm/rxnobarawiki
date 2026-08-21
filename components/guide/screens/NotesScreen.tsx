@@ -130,6 +130,24 @@ const commands = [
     expected: "Flatpak покажет список и попросит подтверждение. Если обновлений нет, так и напишет.",
   },
   {
+    group: "Сеть и VPN",
+    title: "Показать активные сетевые соединения",
+    command: "nmcli connection show --active",
+    label: "Активные соединения NetworkManager",
+    safety: "Только читает",
+    description: "Показывает, какие соединения сейчас подняты: обычный Ethernet и не больше одного VPN.",
+    expected: "увидишь проводное соединение и, если туннель включен, ровно одну VPN-запись. Два VPN сразу - ошибка настройки.",
+  },
+  {
+    group: "Сеть и VPN",
+    title: "Проверить, кто отвечает за DNS",
+    command: "resolvectl status",
+    label: "Состояние systemd-resolved",
+    safety: "Только читает",
+    description: "Показывает DNS текущих интерфейсов. Ничего не меняет и не переписывает resolv.conf.",
+    expected: "для обычной Nobara отвечает systemd-resolved. После отключения VPN не должно остаться чужого DNS только от клиента.",
+  },
+  {
     group: "Звук и устройства",
     title: "Показать все звуковые устройства и потоки",
     command: "wpctl status",
@@ -216,7 +234,7 @@ export function NotesScreen() {
   return (
     <GuideScreen
       id="notes"
-      number="11"
+      number="12"
       title="Заметки"
       description="Команды, которые реально нужны под рукой: все сразу видны, каждая копируется одной кнопкой, никакого аккордеона и терминального сатанизма."
     >

@@ -29,6 +29,9 @@ export function BootScreen() {
         <SupportPanel title="Когда отдельный SSD все-таки понадобится">
           Не сейчас, если все работает. Отдельный SSD имеет смысл при будущей чистой переустановке, постоянной нехватке места в EFI или желании полностью развязать загрузчики Windows и Nobara. Для текущей системы важнее периодическая проверка свободного места, чем операция на разделах ради красивой схемы.
         </SupportPanel>
+        <SupportPanel title="Secure Boot не включать обратно">
+          Официальный FAQ Nobara: кастомное ядро не совместимо с Secure Boot, подписи Microsoft нет и не планируется. Если dual-boot уже стартует, оставь режим как есть. Не включай Secure Boot «для красоты», не жми Reset to Setup Mode и не ставь sbctl. Игры вроде Valorant, которым нужен включенный Secure Boot, остаются в Windows 11.
+        </SupportPanel>
       </StepBlock>
     </GuideScreen>
   );

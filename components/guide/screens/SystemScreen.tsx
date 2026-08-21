@@ -142,6 +142,7 @@ export function SystemScreen() {
           <Setting label="Nobara System Updater" value="Правильное обновление Nobara" />
           <Setting label="Bazaar или Flatpost" value="Графический Flatpak из Flathub" />
           <Setting label="flatpak install --user" value="Flatpak через Konsole" />
+          <Setting label="Файл .AppImage" value="Не DNF: скачал, разрешил запуск, открыл" />
         </Settings>
 
         <SupportPanel title="Почему режим User, а не System">

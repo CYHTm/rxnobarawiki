@@ -19,11 +19,13 @@ import { NotesScreen } from "@/components/guide/screens/NotesScreen";
 import { RescueScreen } from "@/components/guide/screens/RescueScreen";
 import { SystemScreen } from "@/components/guide/screens/SystemScreen";
 import { TuningScreen } from "@/components/guide/screens/TuningScreen";
+import { VpnScreen } from "@/components/guide/screens/VpnScreen";
 
 const screenComponents = {
   overview: OverviewScreen,
   before: BootScreen,
   start: SystemScreen,
+  vpn: VpnScreen,
   display: DisplayScreen,
   lact: LactScreen,
   games: GamesScreen,

@@ -5,7 +5,7 @@ import { Code, GuideScreen, Setting, Settings, StepBlock, SupportPanel } from "@
 
 export function DisplayScreen() {
   return (
-    <GuideScreen id="display" number="03" title="Мониторы и мышь" description="Acer работает на 75 Гц, ViewSonic на 60 Гц. Каждый экран настраивается отдельно.">
+    <GuideScreen id="display" number="04" title="Мониторы и мышь" description="Acer работает на 75 Гц, ViewSonic на 60 Гц. Каждый экран настраивается отдельно.">
       <StepBlock id="monitors" title="Выставь правильную частоту и расположение">
         Открой Параметры системы - Экран и монитор - Конфигурация экрана. Выбери каждый прямоугольник по очереди, выставь частоту и перетащи экраны так, как они стоят на столе. Назначь Acer основным.
         <Settings className="mt-4">

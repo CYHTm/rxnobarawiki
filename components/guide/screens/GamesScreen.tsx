@@ -5,7 +5,7 @@ import { Code, GuideScreen, Setting, Settings, StepBlock, SupportPanel, Warning 
 
 export function GamesScreen() {
   return (
-    <GuideScreen id="games" number="05" title="Игры без зоопарка лаунчеров" description="Рабочие PortProton, Lesta Game Center и Tanks Blitz остаются на месте. Вокруг них строим понятную схему для Steam, других магазинов, старых игр и честной диагностики RX 580.">
+    <GuideScreen id="games" number="06" title="Игры без зоопарка лаунчеров" description="Рабочие PortProton, Lesta Game Center и Tanks Blitz остаются на месте. Вокруг них строим понятную схему для Steam, других магазинов, старых игр и честной диагностики RX 580.">
       <Warning>
         Одна и та же Windows-игра не становится совместимее от тройной установки в PortProton, Lutris и Bottles. Выбери один основной инструмент, сохрани рабочий префикс и меняй по одному параметру. Лаунчеры не покемоны, собирать всех необязательно.
       </Warning>
